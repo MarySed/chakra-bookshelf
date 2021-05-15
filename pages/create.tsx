@@ -1,0 +1,88 @@
+import Layout from 'components/Layout';
+import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex } from '@chakra-ui/react';
+import { SyntheticEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+
+const Create = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+      const body = { title, content };
+
+      await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      // Navigate to drafts page once you create a draft
+      await router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <Layout>
+      <Heading size="2xl" as="h1" mb={12}>
+        What's on your mind?
+      </Heading>
+      <Flex direction="column" alignItems="center" justifyContent="center">
+        <FormControl id="title" mb={6}>
+          <FormLabel pl={3} fontSize="xx-large">
+            Title
+          </FormLabel>
+          <Input
+            borderRadius={0}
+            borderLeft="2px solid"
+            borderLeftColor="white"
+            p={4}
+            variant="unstyled"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            _hover={{ borderLeftColor: 'gray.300' }}
+            _focus={{ borderLeftColor: 'gray.500' }}
+            placeholder="Title"
+          />
+        </FormControl>
+
+        <FormControl id="content" mb={6}>
+          <FormLabel pl={3} fontSize="xx-large">
+            Body
+          </FormLabel>
+          <Textarea
+            minH="60vh"
+            p={4}
+            variant="unstyled"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Share your thoughts..."
+          ></Textarea>
+        </FormControl>
+
+        <Button
+          colorScheme="purple"
+          type="submit"
+          maxW="lg"
+          onClick={handleSubmit}
+          isLoading={loading}
+        >
+          Create Draft
+        </Button>
+      </Flex>
+    </Layout>
+  );
+};
+
+export default Create;
