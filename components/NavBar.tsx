@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/client';
+import { signOut, signIn, useSession } from 'next-auth/client';
 import {
   Avatar,
   Box,
@@ -56,7 +56,7 @@ const NavBar = () => {
           </HStack>
           <Flex alignItems="center" gridGap={3}>
             <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {session && !loading ? (
+              {session ? (
                 <Button
                   onClick={() => signOut()}
                   variant="outline"
@@ -66,9 +66,14 @@ const NavBar = () => {
                   Sign out
                 </Button>
               ) : (
-                <NavLink route={router.pathname} to="/api/auth/signin" isLoading={loading}>
+                <Button
+                  onClick={() => signIn()}
+                  variant="outline"
+                  colorScheme="purple"
+                  isLoading={loading}
+                >
                   Sign in
-                </NavLink>
+                </Button>
               )}
             </HStack>
             <Menu>
@@ -82,7 +87,7 @@ const NavBar = () => {
         {isOpen && (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {session && !loading ? (
+              {session ? (
                 <>
                   <Button onClick={() => signOut()} isLoading={loading}>
                     Sign out

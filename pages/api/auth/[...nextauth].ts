@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import Adapters from 'next-auth/adapters';
 import Providers from 'next-auth/providers';
 import prisma from 'lib/prisma';
+import { UserEmailType, UserType, ProviderAccountType, SessionType } from 'types/types';
 
 const options = {
   providers: [
@@ -14,8 +15,37 @@ const options = {
 
   adapter: Adapters.Prisma.Adapter({ prisma }),
   secret: process.env.SECRET,
+
+  callbacks: {
+    signIn: async (user: UserType, account: ProviderAccountType) => {
+      // Thank you to https://github.com/imadatyatalah for helping me figure out how to properly capture user emails
+      const res = await fetch('https://api.github.com/user/emails', {
+        headers: {
+          Authorization: `token ${account.accessToken}`,
+        },
+      });
+
+      const userEmails: UserEmailType[] = await res.json();
+
+      if (!userEmails || !userEmails.length) {
+        return;
+      }
+
+      const primaryEmail = userEmails.find((email) => email.primary);
+
+      user.email = primaryEmail?.email ?? '';
+    },
+
+    session: async (session: SessionType, user: UserType) => {
+      return Promise.resolve({
+        ...session,
+        user,
+      });
+    },
+  },
 };
 
+// @ts-expect-error Currently too lazy to look up the correct proptypes for all of this
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 
 export default authHandler;

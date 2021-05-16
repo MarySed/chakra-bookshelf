@@ -11,7 +11,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
 
 ### Bugs 💀
 
-- [ ] User email not captured properly on user registration
+- [x] User email not captured properly on user registration
 - [ ] Loading & debounce not implmented properly on some buttons
 
 ### Features ⚒️
@@ -59,3 +59,9 @@ This file has no migrations due to compatibility issues between Prisma and Herok
 To fill in the `GITHUB` env variables, you'll need to create an OAuth application on Github. You can do that quite easily through the developer settings in your Github account.
 
 You can follow an online guide like [this one](https://blog.logrocket.com/how-to-use-nextauth-js-for-client-side-authentication-in-next-js/s) to figure out how to fill in both `GITHUB` and `NEXTAUTH` .env variables.
+
+## Thanks 🎀
+
+Thank you to these users for helping out!
+
+[Imadatyatalah](https://github.com/imadatyatalah)

@@ -2,7 +2,6 @@ import { Flex, Heading, Text, Button } from '@chakra-ui/react';
 import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
-// import { useState } from 'react';
 import Router from 'next/router';
 import { useSession } from 'next-auth/client';
 
@@ -62,8 +61,6 @@ const Post = ({ post }: { post: PostProps }) => {
       console.error(error);
     }
   };
-
-  console.log(loading, 'loading');
 
   return (
     <Layout>

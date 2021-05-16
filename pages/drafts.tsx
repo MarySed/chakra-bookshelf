@@ -1,7 +1,7 @@
 import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
-import { getSession, useSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { PostProps } from './p/[id]';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import Post from 'components/Post';
@@ -40,18 +40,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       drafts,
+      session,
     },
   };
 };
 
 type Props = {
   drafts: PostProps[];
+  session: any;
 };
 
-const Drafts = ({ drafts }: Props) => {
-  // TODO: Remove useSession and pass in session as a prop given that we're already fetching it in getServerSideProps
-  const [session] = useSession();
-
+const Drafts = ({ drafts, session }: Props) => {
   return (
     <Layout>
       <Heading size="2xl" as="h1" mb={12}>
