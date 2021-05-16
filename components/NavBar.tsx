@@ -26,9 +26,10 @@ const NavBar = () => {
   return (
     <>
       <Box
-        bg={useColorModeValue('base.inverted', 'blackAlpha.100')}
+        bg={useColorModeValue('base.inverted', 'base')}
         mb={12}
         px={{ base: 6, lg: 12 }}
+        boxShadow="md"
       >
         <Flex height={16} alignItems="center" justifyContent="space-between">
           <IconButton
@@ -40,12 +41,12 @@ const NavBar = () => {
           />
           <HStack spacing={8} alignItems="center">
             {/* TODO: Replace bookshelf with logo */}
-            <Box textColor="purple.400">{'BOOKSHELF'}</Box>
+            <Box textColor="main">{'BOOKSHELF'}</Box>
             <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-              <NavLink route={router.pathname} to="/">
+              <NavLink route={router.pathname} to="/" colorScheme="gray">
                 Timeline
               </NavLink>
-              <NavLink route={router.pathname} to="/drafts">
+              <NavLink route={router.pathname} to="/drafts" colorScheme="gray">
                 Drafts
               </NavLink>
               <NavLink route={router.pathname} to="/create" variant="solid" isLoading={loading}>
@@ -59,10 +60,9 @@ const NavBar = () => {
                 <Button
                   onClick={() => signOut()}
                   variant="outline"
-                  // colorScheme="purple"
-                  bg="main"
+                  bg="base.900"
                   color="base.inverted"
-                  _hover={{ bg: 'main.dark' }}
+                  _hover={{ bg: 'base.800' }}
                   isLoading={loading}
                 >
                   Sign out
@@ -71,10 +71,9 @@ const NavBar = () => {
                 <Button
                   onClick={() => signIn()}
                   variant="outline"
-                  // colorScheme="purple"
-                  bg="main"
+                  bg="base.900"
                   color="base.inverted"
-                  _hover={{ bg: 'main.dark' }}
+                  _hover={{ bg: 'base.800' }}
                   isLoading={loading}
                 >
                   Sign in
@@ -83,6 +82,7 @@ const NavBar = () => {
             </HStack>
 
             <IconButton
+              bg={useColorModeValue('base.inverted', 'base')}
               size="md"
               icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
               onClick={toggleColorMode}
@@ -102,10 +102,19 @@ const NavBar = () => {
             <Stack as={'nav'} spacing={4}>
               {session ? (
                 <>
-                  <Button onClick={() => signOut()} isLoading={loading} bgColor="main">
+                  <Button
+                    onClick={() => signOut()}
+                    isLoading={loading}
+                    bg="base.900"
+                    color="base.inverted"
+                    _hover={{ bg: 'base.800' }}
+                  >
                     Sign out
                   </Button>
-                  <NavLink route={router.pathname} to="/drafts">
+                  <NavLink route={router.pathname} to="/" colorScheme="gray">
+                    Timeline
+                  </NavLink>
+                  <NavLink route={router.pathname} to="/drafts" colorScheme="gray">
                     Drafts
                   </NavLink>
                   <NavLink route={router.pathname} to="/create" variant="solid">
@@ -114,7 +123,16 @@ const NavBar = () => {
                 </>
               ) : (
                 <>
-                  <Button onClick={() => signIn()} isLoading={loading} bgColor="main">
+                  <NavLink route={router.pathname} to="/" colorScheme="gray">
+                    Timeline
+                  </NavLink>
+                  <Button
+                    onClick={() => signIn()}
+                    isLoading={loading}
+                    bg="base.900"
+                    color="base.inverted"
+                    _hover={{ bg: 'base.800' }}
+                  >
                     Sign in
                   </Button>
                 </>

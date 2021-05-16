@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Button } from '@chakra-ui/react';
+import { Flex, Heading, Text, Button, useColorModeValue } from '@chakra-ui/react';
 import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
@@ -64,16 +64,35 @@ const Post = ({ post }: { post: PostProps }) => {
 
   return (
     <Layout>
-      <Flex direction="column" maxW="80vw">
-        <Heading size="2xl" as="h1" mb={12}>
+      <Flex
+        direction="column"
+        w="100%"
+        p={12}
+        bg={useColorModeValue('base.inverted', 'gray.800')}
+        width="100%"
+        rounded={6}
+        borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
+        borderWidth={1}
+      >
+        <Heading size="2xl" as="h1" mb={2}>
           {post.title}
+        </Heading>
+        <Heading size="lg" as="sub" mb={12} fontWeight="thin">
+          By {post.author?.name}
         </Heading>
         <Text fontSize="lg" mb={12}>
           {post?.content}
         </Text>
         <Flex gridGap={6} wrap="wrap">
           {userCanEdit && !post.published && (
-            <Button colorScheme="purple" maxW="md" onClick={handlePublish} isLoading={loading}>
+            <Button
+              bg={'main'}
+              color={'base.inverted'}
+              _hover={{ bg: 'main.dark' }}
+              maxW="md"
+              onClick={handlePublish}
+              isLoading={loading}
+            >
               Publish Story
             </Button>
           )}

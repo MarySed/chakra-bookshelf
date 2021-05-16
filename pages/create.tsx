@@ -1,5 +1,14 @@
 import Layout from 'components/Layout';
-import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Button,
+  Textarea,
+  Flex,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
@@ -35,7 +44,18 @@ const Create = () => {
       <Heading size="lg" as="h1" mb={3}>
         What's on your mind?
       </Heading>
-      <Flex direction="column" alignItems="center" justifyContent="center" mt={12}>
+      <Flex
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        w="100%"
+        p={12}
+        bg={useColorModeValue('base.inverted', 'gray.800')}
+        width="100%"
+        rounded={6}
+        borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
+        borderWidth={1}
+      >
         <FormControl id="title" mb={6}>
           <FormLabel pl={3} fontSize="xx-large">
             Title
@@ -48,8 +68,9 @@ const Create = () => {
             variant="unstyled"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            _hover={{ borderLeftColor: 'purple.300' }}
-            _focus={{ borderLeftColor: 'purple.500' }}
+            _hover={{ borderLeftColor: 'base.300' }}
+            _focus={{ borderLeftColor: 'base.500' }}
+            _active={{ borderLeftColor: 'base.500' }}
             placeholder="Title"
           />
         </FormControl>
@@ -69,7 +90,9 @@ const Create = () => {
         </FormControl>
 
         <Button
-          colorScheme="purple"
+          bg={'main'}
+          color={'base.inverted'}
+          _hover={{ bg: 'main.dark' }}
           type="submit"
           maxW="lg"
           onClick={handleSubmit}

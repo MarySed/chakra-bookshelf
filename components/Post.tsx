@@ -25,13 +25,13 @@ const Post = ({ post }: { post: PostProps }) => {
         <Heading marginY={1} as="h1" size="xl">
           <Link
             textDecoration="none"
-            _hover={{ textDecoration: 'none', textColor: 'purple.500' }}
+            _hover={{ textDecoration: 'none', textColor: 'main' }}
             href={`/p/${post.id}`}
           >
             {post.title}
           </Link>
         </Heading>
-        <Heading as="sub" color="purple.500" fontWeight="thin" size="md" mb={6}>
+        <Heading as="sub" color="main" fontWeight="thin" size="md" mb={6}>
           By {post.author?.name ?? 'Unknown author'}
         </Heading>
         <Text as="p" marginTop="2" color={useColorModeValue('gray.700', 'gray.200')} fontSize="md">
