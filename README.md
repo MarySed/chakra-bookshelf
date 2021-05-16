@@ -26,12 +26,12 @@ May drop this and use CRA & Knex instead. OPTIONS.
 ### UI Improvements ✨
 
 - [x] ~~User profile card on Timeline right side if logged in~~
-- [ ] Login card on Timeline right side if not logged in
-- [ ] Dark mode implementation
+- [x] ~~Login card on Timeline right side if not logged in~~
+- [x] ~~Dark mode implementation~~
 - [x] ~~Display user profile image on navbar avatar~~
 - [ ] Create dropdown for navbar avatar with link to user page and user reviews list
 - [ ] Make things less uggo in general lol 😭
-- [ ] Is purple the right choice? 🤔
+- [x] ~~Is purple the right choice? 🤔~~ Answer: No
 
 ### Dev Experience (My Experience) Improvements 💻
 
@@ -41,6 +41,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
 
 - [ ] User validation with Google or Facebook
 - [ ] Integration with Goodreads API to get book ratings
+- [ ] Integration with Goodreads API to get list of books or something I dunno
 - [ ] Allow users to rate books
 - [ ] Deploy to Vercel
 

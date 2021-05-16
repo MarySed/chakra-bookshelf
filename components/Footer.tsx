@@ -4,12 +4,13 @@ import { Flex } from '@chakra-ui/layout';
 const Footer = () => {
   return (
     <Flex
-      bg={useColorModeValue('base.300', 'gray.800')}
+      bg={useColorModeValue('base.300', 'base')}
       minH="30vh"
       alignItems="center"
       justifyContent="center"
+      color="base.inverted"
     >
-      THIS IS AFOOTERI JFOEJ+OFIJ
+      Lol what am I gonna put in a footer?
     </Flex>
   );
 };

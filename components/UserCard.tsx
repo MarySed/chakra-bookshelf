@@ -9,6 +9,7 @@ const UserCard = ({ session }: { session: Session | null }) => {
   return (
     <Flex
       rounded={6}
+      borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
       backgroundColor={useColorModeValue('white', 'gray.800')}
       p={12}
       direction="column"
