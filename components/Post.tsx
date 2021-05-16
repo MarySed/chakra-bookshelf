@@ -4,14 +4,16 @@ import { PostProps } from 'pages/p/[id]';
 const Post = ({ post }: { post: PostProps }) => {
   return (
     <Flex
-      width={{ base: '100%', lg: '90%' }}
-      borderColor="gray.300"
+      bg={useColorModeValue('white', 'gray.800')}
+      width="100%"
+      rounded={6}
+      borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
       p={12}
       direction="column"
       borderWidth={1}
       transition="ease-in"
       transitionDuration="0.2s"
-      _hover={{ boxShadow: 'lg', borderColor: 'purple.300' }}
+      _hover={{ boxShadow: 'lg', borderColor: 'gray.300' }}
     >
       <Box
         display="flex"

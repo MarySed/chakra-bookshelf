@@ -12,24 +12,23 @@ import {
   useColorModeValue,
   useDisclosure,
   Stack,
+  useColorMode,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
 import NavLink from 'components/NavLink';
 
 const NavBar = () => {
   const [session, loading] = useSession();
-
-  const router = useRouter();
-
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
 
   return (
     <>
       <Box
-        borderColor={useColorModeValue('purple.100', 'purple.900')}
-        borderBottomWidth={1}
-        px={4}
-        mb={6}
+        bg={useColorModeValue('base.inverted', 'blackAlpha.100')}
+        mb={12}
+        px={{ base: 6, lg: 12 }}
       >
         <Flex height={16} alignItems="center" justifyContent="space-between">
           <IconButton
@@ -60,7 +59,10 @@ const NavBar = () => {
                 <Button
                   onClick={() => signOut()}
                   variant="outline"
-                  colorScheme="purple"
+                  // colorScheme="purple"
+                  bg="main"
+                  color="base.inverted"
+                  _hover={{ bg: 'main.dark' }}
                   isLoading={loading}
                 >
                   Sign out
@@ -69,13 +71,24 @@ const NavBar = () => {
                 <Button
                   onClick={() => signIn()}
                   variant="outline"
-                  colorScheme="purple"
+                  // colorScheme="purple"
+                  bg="main"
+                  color="base.inverted"
+                  _hover={{ bg: 'main.dark' }}
                   isLoading={loading}
                 >
                   Sign in
                 </Button>
               )}
             </HStack>
+
+            <IconButton
+              size="md"
+              icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+              onClick={toggleColorMode}
+              aria-label="Toggle color mode"
+            />
+
             <Menu>
               <MenuButton as="button" rounded="full" cursor="pointer">
                 <Avatar size="sm" />
@@ -89,7 +102,7 @@ const NavBar = () => {
             <Stack as={'nav'} spacing={4}>
               {session ? (
                 <>
-                  <Button onClick={() => signOut()} isLoading={loading}>
+                  <Button onClick={() => signOut()} isLoading={loading} bgColor="main">
                     Sign out
                   </Button>
                   <NavLink route={router.pathname} to="/drafts">
@@ -101,9 +114,9 @@ const NavBar = () => {
                 </>
               ) : (
                 <>
-                  <NavLink route={router.pathname} to="/api/auth/signin">
+                  <Button onClick={() => signIn()} isLoading={loading} bgColor="main">
                     Sign in
-                  </NavLink>
+                  </Button>
                 </>
               )}
             </Stack>

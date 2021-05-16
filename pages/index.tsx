@@ -26,15 +26,15 @@ export const getServerSideProps = async () => {
 };
 
 const App = ({ feed }: { feed: PostProps[] }) => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   return (
     <>
       <Layout>
-        <Heading size="2xl" as="h1" mb={12}>
-          {session && !loading ? `Welcome, ${session.user?.name}` : 'Recent updates'}
+        <Heading size="lg" as="h1" mb={3}>
+          Posts
         </Heading>
-        <Grid templateColumns="repeat(5, 1fr)">
+        <Grid templateColumns="repeat(5, 1fr)" gridColumnGap={4}>
           <GridItem colSpan={{ base: 5, lg: 4 }} mb={6}>
             <Flex direction="column" gridGap={4}>
               {feed &&

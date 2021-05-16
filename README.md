@@ -11,7 +11,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
 
 ### Bugs 💀
 
-- [x] User email not captured properly on user registration
+- [x] ~~User email not captured properly on user registration~~
 - [ ] Loading & debounce not implmented properly on some buttons
 
 ### Features ⚒️
@@ -25,8 +25,9 @@ May drop this and use CRA & Knex instead. OPTIONS.
 
 ### UI Improvements ✨
 
-- [ ] User profile card on Timeline right side if logged in
+- [x] ~~User profile card on Timeline right side if logged in~~
 - [ ] Login card on Timeline right side if not logged in
+- [ ] Dark mode implementation
 - [ ] Display user profile image on navbar avatar
 - [ ] Create dropdown for navbar avatar with link to user page and user reviews list
 - [ ] Make things less uggo in general lol 😭
@@ -54,7 +55,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
   - [ ] GITHUB_SECRET
   - [ ] NEXTAUTH_URL
 
-This file has no migrations due to compatibility issues between Prisma and Heroku Postgres databases. If you develop this with a local postgres db, you can create migrations lol.
+This repo has no migrations due to compatibility issues between Prisma and Heroku Postgres databases. If you develop this with a local postgres db, you can create migrations lol.
 
 To fill in the `GITHUB` env variables, you'll need to create an OAuth application on Github. You can do that quite easily through the developer settings in your Github account.
 

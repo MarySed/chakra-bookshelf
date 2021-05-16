@@ -19,6 +19,11 @@ const options = {
   callbacks: {
     signIn: async (user: UserType, account: ProviderAccountType) => {
       // Thank you to https://github.com/imadatyatalah for helping me figure out how to properly capture user emails
+
+      if (user.email !== '') {
+        return;
+      }
+
       const res = await fetch('https://api.github.com/user/emails', {
         headers: {
           Authorization: `token ${account.accessToken}`,

@@ -35,6 +35,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         },
       },
     },
+
+    orderBy: {
+      id: 'desc',
+    },
   });
 
   return {
@@ -53,7 +57,7 @@ type Props = {
 const Drafts = ({ drafts, session }: Props) => {
   return (
     <Layout>
-      <Heading size="2xl" as="h1" mb={12}>
+      <Heading size="lg" as="h1" mb={3}>
         Drafts
       </Heading>
       <Flex direction="column" gridGap={4}>

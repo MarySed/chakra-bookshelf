@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/client';
 const Create = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [loading, setLoading] = useState(false);
 
   const [, loading] = useSession();
 
@@ -33,10 +32,10 @@ const Create = () => {
 
   return (
     <Layout>
-      <Heading size="2xl" as="h1" mb={12}>
+      <Heading size="lg" as="h1" mb={3}>
         What's on your mind?
       </Heading>
-      <Flex direction="column" alignItems="center" justifyContent="center">
+      <Flex direction="column" alignItems="center" justifyContent="center" mt={12}>
         <FormControl id="title" mb={6}>
           <FormLabel pl={3} fontSize="xx-large">
             Title
