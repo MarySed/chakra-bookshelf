@@ -28,7 +28,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
 - [x] ~~User profile card on Timeline right side if logged in~~
 - [ ] Login card on Timeline right side if not logged in
 - [ ] Dark mode implementation
-- [ ] Display user profile image on navbar avatar
+- [x] ~~Display user profile image on navbar avatar~~
 - [ ] Create dropdown for navbar avatar with link to user page and user reviews list
 - [ ] Make things less uggo in general lol 😭
 - [ ] Is purple the right choice? 🤔

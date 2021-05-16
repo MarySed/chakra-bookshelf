@@ -91,7 +91,7 @@ const NavBar = () => {
 
             <Menu>
               <MenuButton as="button" rounded="full" cursor="pointer">
-                <Avatar size="sm" />
+                <Avatar name={session?.user?.name!} src={session?.user?.image!} size="sm" />
               </MenuButton>
             </Menu>
           </Flex>
