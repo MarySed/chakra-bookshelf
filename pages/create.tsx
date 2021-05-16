@@ -49,8 +49,8 @@ const Create = () => {
             variant="unstyled"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            _hover={{ borderLeftColor: 'gray.300' }}
-            _focus={{ borderLeftColor: 'gray.500' }}
+            _hover={{ borderLeftColor: 'purple.300' }}
+            _focus={{ borderLeftColor: 'purple.500' }}
             placeholder="Title"
           />
         </FormControl>

@@ -26,7 +26,7 @@ const NavBar = () => {
   return (
     <>
       <Box
-        borderColor={useColorModeValue('gray.100', 'gray.900')}
+        borderColor={useColorModeValue('purple.100', 'purple.900')}
         borderBottomWidth={1}
         px={4}
         mb={6}

@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <Flex height="100vh" direction="column">
       <NavBar />
-      <Flex direction="column" px={12} pb={12}>
+      <Flex direction="column" px={{ base: 6, lg: 12 }} pb={12}>
         {children}
       </Flex>
     </Flex>

@@ -4,19 +4,14 @@ import { PostProps } from 'pages/p/[id]';
 const Post = ({ post }: { post: PostProps }) => {
   return (
     <Flex
-      width={[
-        '100%', // 0-30em
-        '80%', // 30em-48em
-        '80%', // 48em-62em
-        '80%', // 62em+
-      ]}
+      width={{ base: '100%', lg: '90%' }}
       borderColor="gray.300"
       p={12}
       direction="column"
       borderWidth={1}
       transition="ease-in"
       transitionDuration="0.2s"
-      _hover={{ boxShadow: 'lg' }}
+      _hover={{ boxShadow: 'lg', borderColor: 'purple.300' }}
     >
       <Box
         display="flex"
@@ -34,7 +29,7 @@ const Post = ({ post }: { post: PostProps }) => {
             {post.title}
           </Link>
         </Heading>
-        <Heading as="sub" color="gray.900" fontWeight="thin" size="md" mb={6}>
+        <Heading as="sub" color="purple.500" fontWeight="thin" size="md" mb={6}>
           By {post.author?.name ?? 'Unknown author'}
         </Heading>
         <Text as="p" marginTop="2" color={useColorModeValue('gray.700', 'gray.200')} fontSize="md">
