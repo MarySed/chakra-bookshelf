@@ -1,5 +1,5 @@
 import { Flex, Heading, Box, Link, Text, useColorModeValue } from '@chakra-ui/react';
-import { PostProps } from 'pages/posts/[id]';
+import { PostProps } from 'pages/p/[id]';
 
 const Post = ({ post }: { post: PostProps }) => {
   return (
@@ -29,7 +29,7 @@ const Post = ({ post }: { post: PostProps }) => {
           <Link
             textDecoration="none"
             _hover={{ textDecoration: 'none', textColor: 'purple.500' }}
-            href={`/posts/${post.id}`}
+            href={`/p/${post.id}`}
           >
             {post.title}
           </Link>

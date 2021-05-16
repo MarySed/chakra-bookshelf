@@ -2,19 +2,19 @@ import Layout from 'components/Layout';
 import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex } from '@chakra-ui/react';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/client';
 
 const Create = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+
+  const [, loading] = useSession();
 
   const router = useRouter();
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-
-    setLoading(true);
-
     try {
       const body = { title, content };
 
@@ -29,8 +29,6 @@ const Create = () => {
     } catch (error) {
       console.error(error);
     }
-
-    setLoading(false);
   };
 
   return (

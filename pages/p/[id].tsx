@@ -2,8 +2,9 @@ import { Flex, Heading, Text, Button } from '@chakra-ui/react';
 import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Router from 'next/router';
+import { useSession } from 'next-auth/client';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -12,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
     include: {
       author: {
-        select: { name: true },
+        select: { name: true, email: true },
       },
     },
   });
@@ -28,14 +29,17 @@ export type PostProps = {
   content?: string;
   title: string;
   published: boolean;
+  authorId: number;
 };
 
 // Full page view of a user's post/review of a book
 const Post = ({ post }: { post: PostProps }) => {
-  const [loading, setLoading] = useState(false);
+  const [session, loading] = useSession();
 
-  const handleSubmit = async () => {
-    setLoading(true);
+  const userCanEdit = post.author?.email === session?.user?.email;
+
+  const handlePublish = async () => {
+    // setLoading(true);
 
     try {
       await fetch(`/api/publish/${post.id}`, {
@@ -45,11 +49,22 @@ const Post = ({ post }: { post: PostProps }) => {
     } catch (error) {
       console.error(error);
     }
-
-    setLoading(false);
   };
 
-  console.log(post, 'post');
+  const handleDelete = async () => {
+    try {
+      await fetch(`api/posts/${post.id}`, {
+        method: 'DELETE',
+      });
+
+      await Router.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(loading, 'loading');
+
   return (
     <Layout>
       <Flex direction="column" maxW="80vw">
@@ -59,11 +74,24 @@ const Post = ({ post }: { post: PostProps }) => {
         <Text fontSize="lg" mb={12}>
           {post?.content}
         </Text>
-        {!post.published && (
-          <Button colorScheme="purple" maxW="md" onClick={handleSubmit} isLoading={loading}>
-            Publish Story
-          </Button>
-        )}
+        <Flex gridGap={6} wrap="wrap">
+          {userCanEdit && !post.published && (
+            <Button colorScheme="purple" maxW="md" onClick={handlePublish} isLoading={loading}>
+              Publish Story
+            </Button>
+          )}
+          {userCanEdit && (
+            <Button
+              colorScheme="red"
+              maxW="md"
+              variant="outline"
+              onClick={handleDelete}
+              isLoading={loading}
+            >
+              Delete Story
+            </Button>
+          )}
+        </Flex>
       </Flex>
     </Layout>
   );

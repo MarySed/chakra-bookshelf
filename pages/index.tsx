@@ -1,6 +1,6 @@
 import prisma from 'lib/prisma';
 import Layout from 'components/Layout';
-import { PostProps } from './posts/[id]';
+import { PostProps } from './p/[id]';
 import Post from 'components/Post';
 import { Heading, Flex } from '@chakra-ui/layout';
 import { useSession } from 'next-auth/client';

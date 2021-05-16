@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/client';
-import { PostProps } from './posts/[id]';
+import { PostProps } from './p/[id]';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import Post from 'components/Post';
 
@@ -49,6 +49,7 @@ type Props = {
 };
 
 const Drafts = ({ drafts }: Props) => {
+  // TODO: Remove useSession and pass in session as a prop given that we're already fetching it in getServerSideProps
   const [session] = useSession();
 
   return (

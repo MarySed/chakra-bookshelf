@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BOOKSHELF: Next.js, Prisma, and Chakra-UI
 
-## Getting Started
+Ideally this is going to be a small Goodreads-like personal bookshelf/social media app.
+Currently using NextAuth with Github for user registration.
 
-First, run the development server:
+May drop this and use CRA & Knex instead. OPTIONS.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## TODO List:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Bugs 💀
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [ ] User email not captured properly on user registration
+- [ ] Loading & debounce not implmented properly on some buttons
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Features ⚒️
 
-## Learn More
+- [ ] Post edit functionality `/api/posts/:id`
+- [ ] User profile page `/api/users/:id`
+- [ ] User bookshelf `/api/users/:id/books`
+- [ ] Book page `/api/books/:id`
+- [ ] Book reviews (connected to user & book in question)
+- [ ] User delete account functionality `api/users/:id`
 
-To learn more about Next.js, take a look at the following resources:
+### UI Improvements ✨
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] User profile card on Timeline right side if logged in
+- [ ] Login card on Timeline right side if not logged in
+- [ ] Display user profile image on navbar avatar
+- [ ] Create dropdown for navbar avatar with link to user page and user reviews list
+- [ ] Make things less uggo in general lol 😭
+- [ ] Is purple the right choice? 🤔
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Dev Experience (My Experience) Improvements 💻
 
-## Deploy on Vercel
+- [ ] Replace fetch with axios. I miss axios. 😔 (why am I too lazy to add one tiny package... we shall never know)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Stretch Goals 😴
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [ ] User validation with Google or Facebook
+- [ ] Integration with Goodreads API to get book ratings
+- [ ] Allow users to rate books
+- [ ] Deploy to Vercel
+
+---
+
+## How To
+
+- Git clone this repo.
+- Create a .env file with the following `.env` variables:
+  - [ ] DATABASE_URL
+  - [ ] GITHUB_ID
+  - [ ] GITHUB_SECRET
+  - [ ] NEXTAUTH_URL
+
+This file has no migrations due to compatibility issues between Prisma and Heroku Postgres databases. If you develop this with a local postgres db, you can create migrations lol.
+
+To fill in the `GITHUB` env variables, you'll need to create an OAuth application on Github. You can do that quite easily through the developer settings in your Github account.
+
+You can follow an online guide like [this one](https://blog.logrocket.com/how-to-use-nextauth-js-for-client-side-authentication-in-next-js/s) to figure out how to fill in both `GITHUB` and `NEXTAUTH` .env variables.

@@ -1,6 +1,7 @@
 import prisma from 'lib/prisma';
 import { NextApiHandler } from 'next';
 
+// DELETE request for posts
 const handle: NextApiHandler = async (req, res) => {
   const postId = req.query.id;
 
