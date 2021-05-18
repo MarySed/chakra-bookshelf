@@ -3,19 +3,19 @@ import { NextApiHandler } from 'next';
 
 // DELETE request for posts
 const handle: NextApiHandler = async (req, res) => {
-  const postId = req.query.id;
-
-  if (req.method === 'DELETE') {
-    const post = await prisma.post.delete({
-      where: {
-        id: Number(postId),
-      },
-    });
-
-    res.json(post);
-  } else {
-    throw new Error("Sorry you can't delete posts with this HTTP method...");
+  if (req.method !== 'DELETE') {
+    return res.status(405).json({ message: 'Method not allowed' });
   }
+
+  const { id } = req.query;
+
+  const post = await prisma.post.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  res.json(post);
 };
 
 export default handle;
