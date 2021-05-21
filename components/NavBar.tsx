@@ -25,12 +25,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Box
-        bg={useColorModeValue('base.inverted', 'base')}
-        mb={12}
-        px={{ base: 6, lg: 12 }}
-        boxShadow="md"
-      >
+      <Box bg={useColorModeValue('base.inverted', 'base')} mb={12} px={{ base: 6, lg: 12 }} boxShadow="md">
         <Flex height={16} alignItems="center" justifyContent="space-between">
           <IconButton
             size="md"
@@ -91,7 +86,7 @@ const NavBar = () => {
 
             <Menu>
               <MenuButton as="button" rounded="full" cursor="pointer">
-                <Avatar name={session?.user?.name!} src={session?.user?.image!} size="sm" />
+                <Avatar name={session?.user?.name ?? ''} src={session?.user?.image ?? ''} size="sm" />
               </MenuButton>
             </Menu>
           </Flex>

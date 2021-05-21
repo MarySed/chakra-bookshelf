@@ -1,14 +1,5 @@
 import Layout from 'components/Layout';
-import {
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Button,
-  Textarea,
-  Flex,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex, useColorModeValue } from '@chakra-ui/react';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';

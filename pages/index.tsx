@@ -27,7 +27,6 @@ export const getServerSideProps = async () => {
 
 const App = ({ feed }: { feed: PostProps[] }) => {
   const [session] = useSession();
-
   return (
     <>
       <Layout>

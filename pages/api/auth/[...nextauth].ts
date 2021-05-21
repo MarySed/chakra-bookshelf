@@ -20,7 +20,7 @@ const options = {
     signIn: async (user: UserType, account: ProviderAccountType) => {
       // Thank you to https://github.com/imadatyatalah for helping me figure out how to properly capture user emails
 
-      if (user.email !== '') {
+      if (user.email) {
         return;
       }
 
@@ -38,7 +38,19 @@ const options = {
 
       const primaryEmail = userEmails.find((email) => email.primary);
 
-      user.email = primaryEmail?.email ?? '';
+      const preventDuplicate = await prisma.user.findUnique({
+        where: {
+          email: primaryEmail?.email,
+        },
+      });
+
+      if (preventDuplicate) {
+        return;
+      }
+
+      //@ts-expect-error I could do an early return if primaryemail is undefined to fix this but I'm lazy
+      user.email = primaryEmail?.email;
+      return;
     },
 
     session: async (session: SessionType, user: UserType) => {

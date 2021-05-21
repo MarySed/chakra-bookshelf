@@ -29,6 +29,7 @@ model User {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]
   bio           Bio?
+  books         Book[]
 
   @@map(name: "users")
 }
@@ -66,9 +67,31 @@ model Session {
 }
 
 model Bio {
-  id     Int     @id @default(autoincrement())
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
-  bio    String?
+  id      Int     @id @default(autoincrement())
+  userId  Int?    @unique
+  user    User?   @relation(fields: [userId], references: [id])
+  content String?
+}
 
+model Book {
+  id        Int     @id @default(autoincrement())
+  authorId  Int?
+  author    Author? @relation(fields: [authorId], references: [id])
+  title     String
+  language  String
+  year      Int
+  link      String
+  imageLink String
+  country   String
+  pages     Int
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model Author {
+  id        Int     @id @default(autoincrement())
+  fullName  String  @unique @map(name: "full_name")
+  firstName String? @map(name: "first_name")
+  lastName  String? @map(name: "last_name")
+  books     Book[]
 }

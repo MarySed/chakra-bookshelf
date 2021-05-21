@@ -15,19 +15,9 @@ const Post = ({ post }: { post: PostProps }) => {
       transitionDuration="0.2s"
       _hover={{ boxShadow: 'lg', borderColor: 'gray.300' }}
     >
-      <Box
-        display="flex"
-        flex="1"
-        flexDirection="column"
-        justifyContent="center"
-        marginTop={{ base: '3', sm: '0' }}
-      >
+      <Box display="flex" flex="1" flexDirection="column" justifyContent="center" marginTop={{ base: '3', sm: '0' }}>
         <Heading marginY={1} as="h1" size="xl">
-          <Link
-            textDecoration="none"
-            _hover={{ textDecoration: 'none', textColor: 'main' }}
-            href={`/p/${post.id}`}
-          >
+          <Link textDecoration="none" _hover={{ textDecoration: 'none', textColor: 'main' }} href={`/p/${post.id}`}>
             {post.title}
           </Link>
         </Heading>

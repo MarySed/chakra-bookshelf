@@ -98,13 +98,7 @@ const Post = ({ post }: { post: PostProps }) => {
             </Button>
           )}
           {userCanEdit && (
-            <Button
-              colorScheme="red"
-              maxW="md"
-              variant="outline"
-              onClick={handleDelete}
-              isLoading={loading}
-            >
+            <Button colorScheme="gray" maxW="md" variant="outline" onClick={handleDelete} isLoading={loading}>
               Delete Story
             </Button>
           )}
