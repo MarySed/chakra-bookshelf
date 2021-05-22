@@ -1,93 +1,55 @@
 import Layout from 'components/Layout';
-import { FormControl, FormLabel, Heading, Button, Textarea, Flex, useColorModeValue } from '@chakra-ui/react';
-import { SyntheticEvent, useState } from 'react';
+import { Button, Flex, useColorModeValue, Avatar } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import Router from 'next/router';
 import { getSession } from 'next-auth/client';
 import prisma from 'lib/prisma';
-import { createBio } from 'utilities/utils';
+import { Session } from 'next-auth';
+// import Router from 'next/router'; will add in later...
+import { Bio } from '.prisma/client';
 
-// TODO: Currently this is a work in progress. Will update to match design and fucntionality ideas soon.
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+// TODO: This was a test of functionality. Move into new directory and update behavior
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+  const userId = Number(params?.id);
   const session = await getSession({ req });
 
-  // Consider removing this check.
-  if (!session) {
-    res.statusCode = 403;
-
-    return {
-      props: {
-        bio: {
-          content: '',
-          session: null,
-        },
-      },
-    };
-  }
-
-  const bio = await prisma.bio.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
-      userId: Number(params?.id) || -1,
+      id: userId,
     },
 
     select: {
-      content: true,
-      userId: true,
-      id: true,
+      name: true,
+      email: true,
+      bio: true,
+      image: true,
     },
   });
 
   return {
     props: {
-      bio,
+      user,
       session,
+      userId,
     },
   };
 };
 
-const Bio = ({ bio, session }: { bio: { content?: string; userId?: number; id: number }; session: any }) => {
-  console.log(session, 'will come back to you');
-  const [isLoading, setIsLoading] = useState(false);
-  const [body, setContent] = useState(bio?.content ?? '');
+// TODO: Finish this page. Ugh I am so bored I'm being lazy with code choices >_<
 
-  const handleCreate = async ({ event, content }: { event: SyntheticEvent; content: string }) => {
-    event.preventDefault();
-    setIsLoading(true);
+type Props = {
+  user: { name?: string; email?: string; bio?: Bio; image?: string };
+  session: Session | null;
+  userId: number;
+};
 
-    try {
-      // TODO: Replace with SWR
-      await createBio({ content: content });
-    } catch (error) {
-      console.error(error);
-    }
-
-    Router.push('/');
-  };
-
-  const handleDelete = async ({ event }: { event: SyntheticEvent }) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    try {
-      await fetch(`/api/bio/${bio?.id}`, {
-        method: 'DELETE',
-      });
-
-      Router.push('/');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+const UserProfile = ({ user }: Props) => {
+  // TODO: Add check if current user is logged in user
+  console.log(user, 'user');
   return (
     <Layout>
-      <Heading size="lg" as="h1" mb={3}>
-        What's on your mind?
-      </Heading>
       <Flex
         direction="column"
         alignItems="center"
-        justifyContent="center"
         w="100%"
         p={12}
         bg={useColorModeValue('base.inverted', 'gray.800')}
@@ -95,49 +57,29 @@ const Bio = ({ bio, session }: { bio: { content?: string; userId?: number; id: n
         rounded={6}
         borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
         borderWidth={1}
+        height="100vh"
+        minHeight="100vh"
       >
-        <>
-          <FormControl id="content" mb={6}>
-            <FormLabel pl={3} fontSize="xx-large">
-              Body
-            </FormLabel>
-            <Textarea
-              minH="60vh"
-              p={4}
-              variant="unstyled"
-              value={body}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Share your thoughts..."
-            ></Textarea>
-          </FormControl>
-          <Flex gridGap={6} wrap="wrap">
-            <Button
-              bg={'main'}
-              color={'base.inverted'}
-              _hover={{ bg: 'main.dark' }}
-              type="submit"
-              maxW="lg"
-              onClick={(e) => handleCreate({ event: e, content: body })}
-              isLoading={isLoading}
-            >
-              {bio?.content ? 'Create Bio' : 'Update Bio'}
-            </Button>
-            {bio?.content && (
-              <Button
-                colorScheme="gray"
-                type="submit"
-                maxW="lg"
-                onClick={(e) => handleDelete({ event: e })}
-                isLoading={isLoading}
-              >
-                Delete Bio
-              </Button>
-            )}
-          </Flex>
-        </>
+        <Button
+          justifySelf="flex-start"
+          alignSelf="flex-end"
+          bg={'main'}
+          color={'base.inverted'}
+          _hover={{ bg: 'main.dark' }}
+          type="submit"
+          maxW="lg"
+          //   onClick={(e) => setIsEditing(!isEditing)}
+          //   isLoading={isLoading}
+        >
+          Edit Profile
+        </Button>
+        <Flex direction="column" justifyContent="center" height="100%">
+          <Avatar size="2xl" mb={6} rounded="full" src={user.image} />
+          {user.bio?.content ?? ''}
+        </Flex>
       </Flex>
     </Layout>
   );
 };
 
-export default Bio;
+export default UserProfile;

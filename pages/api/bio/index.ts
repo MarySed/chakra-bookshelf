@@ -7,9 +7,11 @@ import { getSession } from 'next-auth/client';
 const handle: NextApiHandler = async (req, res) => {
   const { content } = req.body;
 
+  console.log(content, 'CONTENT IS GETTING PASSED WHEN CREATING');
+
   const session = await getSession({ req });
 
-  if (!session) {
+  if (!session || !content) {
     return;
   }
 
@@ -18,8 +20,8 @@ const handle: NextApiHandler = async (req, res) => {
       content: content,
       user: {
         connect: {
-          //@ts-expect-error TODO: fix this up I guess
-          id: Number(session?.user.id),
+          //@ts-expect-error Will fix this soon
+          id: Number(session?.user?.id),
         },
       },
     },

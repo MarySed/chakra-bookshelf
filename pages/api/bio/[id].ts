@@ -4,13 +4,15 @@ import { NextApiHandler } from 'next';
 const handle: NextApiHandler = async (req, res) => {
   const { id } = req.query;
 
+  const { content } = req.body;
+
   if (req.method === 'PUT') {
     const updatedBio = await prisma.bio.update({
       where: {
-        id: Number(id),
+        userId: Number(id),
       },
       data: {
-        content: req.body.bio,
+        content: content,
       },
     });
 
@@ -19,14 +21,15 @@ const handle: NextApiHandler = async (req, res) => {
   }
 
   if (req.method === 'DELETE') {
+    console.log('DELETE CALLED');
+    console.log('hmmmm');
     const deleteBio = await prisma.bio.delete({
       where: {
-        id: Number(id),
+        userId: Number(id),
       },
     });
 
     res.json(deleteBio);
-
     return;
   }
 

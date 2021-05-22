@@ -3,7 +3,7 @@ import { Session } from 'next-auth';
 import { signIn } from 'next-auth/client';
 import Router from 'next/router';
 
-// TODO: Update design and data available
+// TODO: Update design and data available. Change button when logged in to go to user profile not bio
 const UserCard = ({ session }: { session: Session | null }) => {
   const avatarSrc = session?.user?.image ?? '';
 
@@ -32,7 +32,7 @@ const UserCard = ({ session }: { session: Session | null }) => {
             // @ts-expect-error Sigh.
             onClick={() => Router.push(`/users/${session?.user?.id}`)}
           >
-            Visit Profile
+            Visit Profile [Functionality not done]
           </Button>
         </>
       ) : (
