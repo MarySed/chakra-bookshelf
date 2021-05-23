@@ -17,8 +17,8 @@ Currently using NextAuth with Github for user registration.
 - [ ] Add timestamps to posts
 - [x] ~~User profile page `/users/:id`~~
 - [x] ~~Create bookshelves `/create/bookshelves~~ (might move depending on my plans with the overall structure)
-- [x] ~~Show specific bookshelf `/bookshelves/:id~~`
-- [x] ~~List user bookshelves `/users/:id/bookshelves/list` ~~ (might update to remove list)
+- [x] ~~Show specific bookshelf `/bookshelves/:id`~~
+- [x] ~~List user bookshelves `/users/:id/bookshelves/list`~~ (might update to remove list)
 - [ ] Edit user bookshelves functionality `/bookshelves/:id`
 - [ ] Show book page `/books/:id` 
 - [ ] Create book page 
