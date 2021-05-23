@@ -1,4 +1,4 @@
-import { books } from './books';
+import { books } from './books_two';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -47,12 +47,8 @@ async function main() {
           create: [
             {
               title: item.title,
-              language: item.language,
               link: item.link,
-              imageLink: item.imageLink,
-              year: item.year,
-              pages: item.pages,
-              country: item.country,
+              image: item.image ?? '',
             },
           ],
         },
@@ -63,12 +59,8 @@ async function main() {
           create: [
             {
               title: item.title,
-              language: item.language,
               link: item.link,
-              imageLink: item.imageLink,
-              year: item.year,
-              pages: item.pages,
-              country: item.country,
+              image: item.image ?? '',
             },
           ],
         },

@@ -20,16 +20,16 @@ model Post {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   name          String?
-  email         String?    @unique
-  emailVerified DateTime?  @map(name: "email_verified")
+  email         String?     @unique
+  emailVerified DateTime?   @map(name: "email_verified")
   image         String?
-  createdAt     DateTime   @default(now()) @map(name: "created_at")
-  updatedAt     DateTime   @updatedAt @map(name: "updated_at")
+  createdAt     DateTime    @default(now()) @map(name: "created_at")
+  updatedAt     DateTime    @updatedAt @map(name: "updated_at")
   posts         Post[]
   bio           Bio?
-  bookshelf     Bookshelf?
+  bookshelf     Bookshelf[]
 
   @@map(name: "users")
 }
@@ -78,15 +78,15 @@ model Book {
   authorId    Int?
   author      Author?    @relation(fields: [authorId], references: [id])
   title       String
-  language    String
-  year        Int
   link        String
-  imageLink   String
-  country     String
-  pages       Int
+  image       String
+  language    String?
+  year        Int?
+  country     String?
+  pages       Int?
   bookshelfId Int?
   bookshelf   Bookshelf? @relation(fields: [bookshelfId], references: [id])
-  review      Review?
+  review      Review[]
 }
 
 // Eh, honestly this isn't super necessary but I had the dream of creating a goodreads author page.
@@ -103,8 +103,8 @@ model Author {
 model Bookshelf {
   id     Int    @id @default(autoincrement())
   name   String
-  userId Int
-  user   User   @relation(fields: [userId], references: [id])
+  userId Int?
+  user   User?  @relation(fields: [userId], references: [id])
   books  Book[]
 }
 

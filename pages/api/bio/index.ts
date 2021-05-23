@@ -24,7 +24,7 @@ const handle: NextApiHandler = async (req, res) => {
     },
   });
 
-  res.json(newBio);
+  return res.json(newBio);
 };
 
 export default handle;

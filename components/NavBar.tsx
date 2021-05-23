@@ -13,6 +13,7 @@ import {
   useDisclosure,
   Stack,
   useColorMode,
+  Skeleton,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
 import NavLink from 'components/NavLink';
@@ -50,31 +51,33 @@ const NavBar = () => {
             </HStack>
           </HStack>
           <Flex alignItems="center" gridGap={3}>
-            <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {session ? (
-                <Button
-                  onClick={() => signOut()}
-                  variant="outline"
-                  bg="base.900"
-                  color="base.inverted"
-                  _hover={{ bg: 'base.800' }}
-                  isLoading={loading}
-                >
-                  Sign out
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => signIn()}
-                  variant="outline"
-                  bg="base.900"
-                  color="base.inverted"
-                  _hover={{ bg: 'base.800' }}
-                  isLoading={loading}
-                >
-                  Sign in
-                </Button>
-              )}
-            </HStack>
+            <Skeleton isLoaded={!loading}>
+              <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
+                {session ? (
+                  <Button
+                    onClick={() => signOut()}
+                    variant="outline"
+                    bg="base.900"
+                    color="base.inverted"
+                    _hover={{ bg: 'base.800' }}
+                    isLoading={loading}
+                  >
+                    Sign out
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => signIn()}
+                    variant="outline"
+                    bg="base.900"
+                    color="base.inverted"
+                    _hover={{ bg: 'base.800' }}
+                    isLoading={loading}
+                  >
+                    Sign in
+                  </Button>
+                )}
+              </HStack>
+            </Skeleton>
 
             <IconButton
               bg={useColorModeValue('base.inverted', 'base')}

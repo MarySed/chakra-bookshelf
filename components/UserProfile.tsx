@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/layout';
-import { Button, FormControl, FormLabel } from '@chakra-ui/react';
+import { Button, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Textarea } from '@chakra-ui/textarea';
+import Router from 'next/router';
 import React, { SyntheticEvent } from 'react';
 
 // If content is empty, default to empty string
@@ -19,18 +20,28 @@ const UserProfile = ({
 }) => {
   return (
     <>
-      <FormControl id="content" mb={6}>
+      <Button
+        colorScheme="gray"
+        maxW="lg"
+        onClick={() => Router.push('/')}
+        isLoading={isLoading}
+        disabled={!content}
+        alignSelf="flex-end"
+      >
+        Cancel
+      </Button>
+      <FormControl id="content" mb={6} isInvalid={content.length > 300}>
         <FormLabel pl={3} fontSize="xx-large">
           Edit Profile
         </FormLabel>
         <Textarea
           minH="60vh"
           p={4}
-          variant="unstyled"
           value={content}
           onChange={(e) => handleChange(e.target.value)}
           placeholder="Introduce yourself!"
-        ></Textarea>
+        />
+        <FormErrorMessage>Profile must be less than 300 characters</FormErrorMessage>
       </FormControl>
 
       <Flex gridGap={6} wrap="wrap">
@@ -49,14 +60,7 @@ const UserProfile = ({
             Update profile
           </Button>
 
-          <Button
-            colorScheme="gray"
-            type="submit"
-            maxW="lg"
-            onClick={handleDelete}
-            isLoading={isLoading}
-            disabled={!content}
-          >
+          <Button colorScheme="gray" maxW="lg" onClick={handleDelete} isLoading={isLoading} disabled={!content}>
             Delete profile
           </Button>
         </>

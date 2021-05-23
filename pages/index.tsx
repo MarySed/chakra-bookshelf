@@ -26,7 +26,7 @@ export const getServerSideProps = async () => {
 };
 
 const App = ({ feed }: { feed: PostProps[] }) => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
   return (
     <>
       <Layout>
@@ -43,7 +43,7 @@ const App = ({ feed }: { feed: PostProps[] }) => {
             </Flex>
           </GridItem>
           <GridItem colSpan={{ base: 5, lg: 1 }}>
-            <UserCard session={session} />
+            <UserCard session={session} isLoading={loading} />
           </GridItem>
         </Grid>
       </Layout>

@@ -17,10 +17,12 @@ const options = {
   secret: process.env.SECRET,
 
   callbacks: {
-    signIn: async ({ user, account }: { user: User; account: Account }) => {
+    signIn: async (user: User, account: Account) => {
       // Thank you to https://github.com/imadatyatalah for helping me figure out how to properly capture user emails
 
-      if (user.email) {
+      // Uh, for some reason account and user are returning as undefined now, which did not used to happen as of a few hours ago...
+
+      if (user?.email) {
         return true;
       }
 

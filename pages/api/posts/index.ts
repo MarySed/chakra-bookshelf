@@ -25,7 +25,7 @@ const handle: NextApiHandler = async (req, res) => {
     },
   });
 
-  res.json(newPost);
+  return res.json(newPost);
 };
 
 export default handle;
