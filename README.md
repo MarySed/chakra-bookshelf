@@ -3,9 +3,6 @@
 Ideally this is going to be a small Goodreads-like personal bookshelf/social media app.
 Currently using NextAuth with Github for user registration.
 
-May drop this and use CRA & Knex instead. OPTIONS.
-
----
 
 ## TODO List:
 
@@ -17,11 +14,13 @@ May drop this and use CRA & Knex instead. OPTIONS.
 ### Features ⚒️
 
 - [ ] Post edit functionality `/api/posts/:id`
-- [ ] User profile page `/api/users/:id`
-- [ ] User bookshelf `/api/users/:id/books`
+- [x] ~~User profile page `/api/users/:id`~~
+- [x] ~~Create bookshelves `/api/create/bookshelves
+- [x] ~~Show specific bookshelf `/api/bookshelves/:id`
+- [ ] List user bookshelves `/api/users/:id/bookshelves`
+- [ ] List and manage personal bookshelves `/api/manage/bookshelves` (maybe not lol)
 - [ ] Book page `/api/books/:id`
 - [ ] Book reviews (connected to user & book in question)
-- [ ] User delete account functionality `api/users/:id`
 
 ### UI Improvements ✨
 
@@ -32,6 +31,7 @@ May drop this and use CRA & Knex instead. OPTIONS.
 - [ ] Create dropdown for navbar avatar with link to user page and user reviews list
 - [ ] Make things less uggo in general lol 😭
 - [x] ~~Is purple the right choice? 🤔~~ Answer: No
+- [ ] Update color scheme to match Goodreads
 
 ### Dev Experience (My Experience) Improvements 💻
 
@@ -61,6 +61,24 @@ This repo has no migrations due to compatibility issues between Prisma and Herok
 To fill in the `GITHUB` env variables, you'll need to create an OAuth application on Github. You can do that quite easily through the developer settings in your Github account.
 
 You can follow an online guide like [this one](https://blog.logrocket.com/how-to-use-nextauth-js-for-client-side-authentication-in-next-js/s) to figure out how to fill in both `GITHUB` and `NEXTAUTH` .env variables.
+
+### Commmands
+
+After connecting your `.env` file to your database, you can set things up as follows:
+
+```bash
+> yarn prisma generate
+> yarn prisma db push
+> yarn prisma db seed --preview-feature
+```
+
+If everything works, you should see the data from the `prisma/seed.ts` file reflected in your database.
+
+Prisma has a super convenient UI to work with your database. Check it out with:
+
+```bash
+> yarn prisma studio
+```
 
 ## Thanks 🎀
 
