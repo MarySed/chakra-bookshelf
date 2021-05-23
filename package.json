@@ -13,6 +13,7 @@
     "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'"
   },
   "dependencies": {
+    "@prisma/client": "^2.23.0",
     "@chakra-ui/icons": "^1.0.13",
     "@chakra-ui/react": "^1.6.1",
     "@emotion/react": "^11",
@@ -24,7 +25,6 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@prisma/client": "^2.23.0",
     "@types/node": "^15.6.0",
     "@types/react": "^17.0.5",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
