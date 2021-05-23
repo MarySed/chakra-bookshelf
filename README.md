@@ -13,14 +13,21 @@ Currently using NextAuth with Github for user registration.
 
 ### Features ⚒️
 
-- [ ] Post edit functionality `/api/posts/:id`
-- [x] ~~User profile page `/api/users/:id`~~
-- [x] ~~Create bookshelves `/api/create/bookshelves
-- [x] ~~Show specific bookshelf `/api/bookshelves/:id`
-- [ ] List user bookshelves `/api/users/:id/bookshelves`
-- [ ] List and manage personal bookshelves `/api/manage/bookshelves` (maybe not lol)
-- [ ] Book page `/api/books/:id`
-- [ ] Book reviews (connected to user & book in question)
+- [ ] Post edit functionality `/posts/:id`
+- [ ] Add timestamps to posts
+- [x] ~~User profile page `/users/:id`~~
+- [x] ~~Create bookshelves `/create/bookshelves~~ (might move depending on my plans with the overall structure)
+- [x] ~~Show specific bookshelf `/bookshelves/:id~~`
+- [x] ~~List user bookshelves `/users/:id/bookshelves/list` ~~ (might update to remove list)
+- [ ] Edit user bookshelves functionality `/bookshelves/:id`
+- [ ] Show book page `/books/:id` 
+- [ ] Create book page 
+- [ ] Edit book functionality
+- [ ] List books page `/books`
+- [ ] Create review (I don't think this needs a page, but I might add one) `books/:id` & `/api/reviews`
+- [ ] Add timestamps to reviews
+- [ ] Show review page `/reviews/:id`
+- [ ] Edit review functionality
 
 ### UI Improvements ✨
 
@@ -32,6 +39,9 @@ Currently using NextAuth with Github for user registration.
 - [ ] Make things less uggo in general lol 😭
 - [x] ~~Is purple the right choice? 🤔~~ Answer: No
 - [ ] Update color scheme to match Goodreads
+- [ ] Create book component that looks pretty
+- [ ] Update book list styles 
+- [ ] Once reviews are made, make sure there is a difference between review & post in terms of apeparance
 
 ### Dev Experience (My Experience) Improvements 💻
 
@@ -39,13 +49,12 @@ Currently using NextAuth with Github for user registration.
 
 ### Stretch Goals 😴
 
-- [ ] User validation with Google or Facebook
-- [ ] Integration with Goodreads API to get book ratings
-- [ ] Integration with Goodreads API to get list of books or something I dunno
+- [ ] User validation with Google or Facebook maybe
 - [ ] Allow users to rate books
+- [ ] Add genres & Genres lists pages
+- [ ] Add search functionality
+- [ ] Pagination added to: (1) Timeline, (2) Show bookshelf page (assuming users have a lot of books), (3) Genres pages (if created)
 - [ ] Deploy to Vercel
-
----
 
 ## How To
 
