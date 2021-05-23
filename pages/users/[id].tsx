@@ -5,7 +5,8 @@ import { getSession } from 'next-auth/client';
 import prisma from 'lib/prisma';
 import { Session } from 'next-auth';
 // import Router from 'next/router'; will add in later...
-import { Bio } from '.prisma/client';
+import { Bio, Bookshelf } from '.prisma/client';
+import Router from 'next/router';
 
 // TODO: This was a test of functionality. Move into new directory and update behavior
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
@@ -18,10 +19,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     },
 
     select: {
+      id: true,
       name: true,
       email: true,
       bio: true,
       image: true,
+      bookshelf: true,
     },
   });
 
@@ -35,9 +38,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
 };
 
 // TODO: Finish this page. Ugh I am so bored I'm being lazy with code choices >_<
-
 type Props = {
-  user: { name?: string; email?: string; bio?: Bio; image?: string };
+  user: { id: number; name?: string; email?: string; bio?: Bio; image?: string; bookshelf?: Bookshelf };
   session: Session | null;
   userId: number;
 };
@@ -68,8 +70,7 @@ const UserProfile = ({ user }: Props) => {
           _hover={{ bg: 'main.dark' }}
           type="submit"
           maxW="lg"
-          //   onClick={(e) => setIsEditing(!isEditing)}
-          //   isLoading={isLoading}
+          onClick={() => Router.push(`/bio/${user.id}`)}
         >
           Edit Profile
         </Button>

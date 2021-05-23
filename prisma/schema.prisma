@@ -20,16 +20,16 @@ model Post {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map(name: "email_verified")
+  email         String?    @unique
+  emailVerified DateTime?  @map(name: "email_verified")
   image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  createdAt     DateTime   @default(now()) @map(name: "created_at")
+  updatedAt     DateTime   @updatedAt @map(name: "updated_at")
   posts         Post[]
   bio           Bio?
-  books         Book[]
+  bookshelf     Bookshelf?
 
   @@map(name: "users")
 }
@@ -74,24 +74,44 @@ model Bio {
 }
 
 model Book {
-  id        Int     @id @default(autoincrement())
-  authorId  Int?
-  author    Author? @relation(fields: [authorId], references: [id])
-  title     String
-  language  String
-  year      Int
-  link      String
-  imageLink String
-  country   String
-  pages     Int
-  User      User?   @relation(fields: [userId], references: [id])
-  userId    Int?
+  id          Int        @id @default(autoincrement())
+  authorId    Int?
+  author      Author?    @relation(fields: [authorId], references: [id])
+  title       String
+  language    String
+  year        Int
+  link        String
+  imageLink   String
+  country     String
+  pages       Int
+  bookshelfId Int?
+  bookshelf   Bookshelf? @relation(fields: [bookshelfId], references: [id])
+  review      Review?
 }
 
+// Eh, honestly this isn't super necessary but I had the dream of creating a goodreads author page.
+// Made names unique because of the seed file I decided to use. In a real life scenario I would not do this.
 model Author {
   id        Int     @id @default(autoincrement())
   fullName  String  @unique @map(name: "full_name")
   firstName String? @map(name: "first_name")
   lastName  String? @map(name: "last_name")
   books     Book[]
+}
+
+// Rather than directly connecting users to book, we use a bookshelf.
+model Bookshelf {
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  books  Book[]
+}
+
+// Book review. Note that this is different from Posts.
+model Review {
+  id      Int    @id @default(autoincrement())
+  book    Book   @relation(fields: [bookId], references: [id])
+  bookId  Int
+  content String
 }

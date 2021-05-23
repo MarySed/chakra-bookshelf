@@ -6,8 +6,6 @@ export const createBio = async ({ content }: { content: string }) => {
   try {
     const body = { content };
 
-    console.log('create bio being called');
-
     await fetch('/api/bio', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,13 +16,11 @@ export const createBio = async ({ content }: { content: string }) => {
   }
 };
 
-export const editBio = async ({ content, userId }: { content: string; userId: number }) => {
+export const editBio = async ({ content, id }: { content: string; id: number }) => {
   try {
     const body = { content };
 
-    console.log(body, 'body');
-
-    await fetch(`/api/bio/${userId}`, {
+    await fetch(`/api/bio/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

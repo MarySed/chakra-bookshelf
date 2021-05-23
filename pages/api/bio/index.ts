@@ -2,12 +2,9 @@ import prisma from 'lib/prisma';
 import { NextApiHandler } from 'next';
 import { getSession } from 'next-auth/client';
 
-// TODO: Finish this
 // POST request to create user bio
 const handle: NextApiHandler = async (req, res) => {
   const { content } = req.body;
-
-  console.log(content, 'CONTENT IS GETTING PASSED WHEN CREATING');
 
   const session = await getSession({ req });
 

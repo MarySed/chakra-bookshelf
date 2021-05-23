@@ -16,21 +16,17 @@ const handle: NextApiHandler = async (req, res) => {
       },
     });
 
-    res.json(updatedBio);
-    return;
+    return res.json(updatedBio);
   }
 
   if (req.method === 'DELETE') {
-    console.log('DELETE CALLED');
-    console.log('hmmmm');
     const deleteBio = await prisma.bio.delete({
       where: {
         userId: Number(id),
       },
     });
 
-    res.json(deleteBio);
-    return;
+    return res.json(deleteBio);
   }
 
   return res.status(405).json({ message: 'Method not allowed' });
