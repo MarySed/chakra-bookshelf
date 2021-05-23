@@ -74,9 +74,9 @@ model Bio {
 }
 
 model Book {
-  id          Int        @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   authorId    Int?
-  author      Author?    @relation(fields: [authorId], references: [id])
+  author      Author?     @relation(fields: [authorId], references: [id])
   title       String
   link        String
   image       String
@@ -85,7 +85,7 @@ model Book {
   country     String?
   pages       Int?
   bookshelfId Int?
-  bookshelf   Bookshelf? @relation(fields: [bookshelfId], references: [id])
+  bookshelf   Bookshelf[] @relation(fields: [bookshelfId], references: [id])
   review      Review[]
 }
 

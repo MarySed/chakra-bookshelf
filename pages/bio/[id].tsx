@@ -41,7 +41,7 @@ type Props = {
 };
 
 const Bio = ({ bio, session, userId }: Props) => {
-  console.log(session, 'I forgot what I wanted the session for lol');
+  console.log(session?.expires, 'I forgot what I wanted the session for lol');
 
   const [isLoading, setIsLoading] = useState(false);
   const [body, setBody] = useState(bio?.content ?? '');

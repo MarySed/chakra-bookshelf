@@ -7,9 +7,12 @@ import { BookshelfWithBooks } from 'types/types';
 import { Session } from 'inspector';
 import Router from 'next/router';
 import BookList from 'components/BookList';
+import { useRouter } from 'next/router';
 
 // List all bookshelves of the signed in user
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+  const userId = params?.id;
+  console.log(userId, 'user id will remove');
   const session = await getSession({ req });
 
   // Drafts page cannot be accessed if the user is not logged in
@@ -18,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
     return {
       props: {
-        drafts: [],
+        bookshelves: [],
       },
     };
   }
@@ -53,11 +56,15 @@ type Props = {
 };
 
 const Bookshelves = ({ bookshelves, session }: Props) => {
-  console.log(bookshelves);
+  console.log(bookshelves, 'bookshelves');
+  console.log(session, 'session...');
 
-  if (!session) {
-    return <Text>Please log in to view this page...</Text>;
-  }
+  const router = useRouter();
+
+  const { id } = router.query;
+
+  console.log(id, 'ID inside bookshelves list');
+
   return (
     <Layout>
       <Heading size="lg" as="h1" mb={3}>

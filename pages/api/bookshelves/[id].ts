@@ -5,7 +5,7 @@ const handle: NextApiHandler = async (req, res) => {
   const { id } = req.query;
 
   const { content } = req.body;
-  console.log(content, 'content');
+  // console.log(content, 'content');
 
   if (req.method === 'PUT') {
     const updatedBookshelf = await prisma.bookshelf.update({
