@@ -7,12 +7,9 @@ import { BookshelfWithBooks } from 'types/types';
 import { Session } from 'inspector';
 import Router from 'next/router';
 import BookList from 'components/BookList';
-import { useRouter } from 'next/router';
 
 // List all bookshelves of the signed in user
 export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
-  const userId = params?.id;
-  console.log(userId, 'user id will remove');
   const session = await getSession({ req });
 
   // Drafts page cannot be accessed if the user is not logged in
@@ -29,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, params 
   const bookshelves = await prisma.bookshelf.findMany({
     where: {
       user: {
-        email: session.user?.email,
+        id: Number(params?.id),
       },
     },
 
@@ -60,12 +57,6 @@ type Props = {
 };
 
 const Bookshelves = ({ bookshelves }: Props) => {
-  const router = useRouter();
-
-  const { id } = router.query;
-
-  console.log(id, 'ID inside bookshelves list');
-
   return (
     <Layout>
       <Heading size="lg" as="h1" mb={3}>

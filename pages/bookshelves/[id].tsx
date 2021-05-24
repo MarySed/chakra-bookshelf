@@ -67,7 +67,6 @@ const Bookshelf = ({ post }: { post: PostProps }) => {
     <Layout>
       <Flex
         direction="column"
-        w="100%"
         p={12}
         bg={useColorModeValue('base.inverted', 'gray.800')}
         width="100%"

@@ -4,18 +4,22 @@ import { NextApiHandler } from 'next';
 const handle: NextApiHandler = async (req, res) => {
   const { id } = req.query;
 
-  const { content } = req.body;
-  // console.log(content, 'content');
-
   if (req.method === 'PUT') {
+    if (!req.body.bookId) {
+      return;
+    }
+    // If you are adding book to shelf from book page.
+    const { bookId, shelfId } = req.body;
+
     const updatedBookshelf = await prisma.bookshelf.update({
       where: {
-        id: Number(id),
+        id: Number(shelfId),
       },
       data: {
         books: {
-          //@ts-expect-error TODO: So I think push was added in Prisma 2.20, which I have... Going to check why Books is not recognizing push
-          push: [content],
+          connect: {
+            id: Number(bookId),
+          },
         },
       },
     });

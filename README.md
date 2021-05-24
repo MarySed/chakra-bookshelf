@@ -3,7 +3,6 @@
 Ideally this is going to be a small Goodreads-like personal bookshelf/social media app.
 Currently using NextAuth with Github for user registration.
 
-
 ## TODO List:
 
 ### Bugs 💀
@@ -19,9 +18,9 @@ Currently using NextAuth with Github for user registration.
 - [x] ~~Create bookshelves `/create/bookshelves~~ (might move depending on my plans with the overall structure)
 - [x] ~~Show specific bookshelf `/bookshelves/:id`~~
 - [x] ~~List user bookshelves `/users/:id/bookshelves/list`~~ (might update to remove list)
-- [ ] Edit user bookshelves functionality `/bookshelves/:id`
-- [ ] Show book page `/books/:id` 
-- [ ] Create book page 
+- [x] ~~Edit user bookshelves functionality `/bookshelves/:id`~~
+- [x] ~~Show book page `/books/:id`~~
+- [ ] Create book page
 - [ ] Edit book functionality
 - [ ] List books page `/books`
 - [ ] Create review (I don't think this needs a page, but I might add one) `books/:id` & `/api/reviews`
@@ -35,12 +34,12 @@ Currently using NextAuth with Github for user registration.
 - [x] ~~Login card on Timeline right side if not logged in~~
 - [x] ~~Dark mode implementation~~
 - [x] ~~Display user profile image on navbar avatar~~
-- [ ] Create dropdown for navbar avatar with link to user page and user reviews list
+- [x] ~~Create dropdown for navbar avatar with link to user page and user reviews list~~
 - [ ] Make things less uggo in general lol 😭
 - [x] ~~Is purple the right choice? 🤔~~ Answer: No
 - [ ] Update color scheme to match Goodreads
-- [ ] Create book component that looks pretty
-- [ ] Update book list styles 
+- [x] ~~Create book component that looks pretty~~ (Note: it is not pretty.)
+- [x] ~~Update book list styles~~
 - [ ] Once reviews are made, make sure there is a difference between review & post in terms of apeparance
 
 ### Dev Experience (My Experience) Improvements 💻
@@ -53,6 +52,7 @@ Currently using NextAuth with Github for user registration.
 - [ ] Allow users to rate books
 - [ ] Add genres & Genres lists pages
 - [ ] Add search functionality
+- [ ] Integrate with open library api
 - [ ] Pagination added to: (1) Timeline, (2) Show bookshelf page (assuming users have a lot of books), (3) Genres pages (if created)
 - [ ] Deploy to Vercel
 

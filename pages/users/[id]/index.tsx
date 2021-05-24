@@ -15,8 +15,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   const userId = Number(params?.id);
   const session = await getSession({ req });
 
-  //   console.log(userId, 'userid');
-
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -66,12 +64,8 @@ type Props = {
 const Users = ({ user, session, userId }: Props) => {
   // TODO: Add check if current user is logged in user
 
-  console.log(user, 'user');
-  console.log(session, 'session');
-  console.log(userId, 'userId');
-
   //@ts-expect-error Types are incorrect for session
-  const userCanEdit = user?.id === session?.user?.id;
+  const userCanEdit = userId === session?.user?.id;
 
   return (
     <Layout>

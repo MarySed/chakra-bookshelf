@@ -21,7 +21,6 @@ const BookList = ({ shelf }: Props) => {
 
       <Flex width="100%" overflowX="auto">
         {shelf.books.map((book) => {
-          console.log(book, 'BOOK');
           return <Book book={book} key={book.id} />;
         })}
       </Flex>

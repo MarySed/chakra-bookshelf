@@ -1,6 +1,6 @@
-import { Box, Flex, Heading, useColorModeValue, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Flex, Heading, useColorModeValue, Text, Image, Skeleton } from '@chakra-ui/react';
 import { BookWithAuthor } from 'types/types';
+import Router from 'next/router';
 
 const Book = ({ book }: { book: BookWithAuthor }) => {
   return (
@@ -17,8 +17,9 @@ const Book = ({ book }: { book: BookWithAuthor }) => {
       transitionDuration="0.2s"
       _hover={{ boxShadow: 'lg', borderColor: 'gray.300' }}
       cursor="pointer"
+      onClick={() => Router.push(`/books/${book.id}`)}
     >
-      <Image width="100%" height="250px" src={book.image ?? ''} />
+      <Image width="100%" height="250px" src={book.image ?? ''} fallback={<Skeleton width="100%" height="250px" />} />
       <Box p={4}>
         <Heading as="h2" mb={1} fontSize="lg">
           {book.title}
