@@ -70,7 +70,7 @@ const Bookshelves = ({ bookshelves }: Props) => {
     <Layout>
       <Heading size="lg" as="h1" mb={3}>
         Your Bookshelves {'  '}
-        <Button variant="ghost" onClick={() => Router.push('/create/bookshelf')}>
+        <Button variant="ghost" onClick={() => Router.push('/bookshelves/new')}>
           Create bookshelf
         </Button>
       </Heading>

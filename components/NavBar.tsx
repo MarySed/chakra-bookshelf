@@ -56,7 +56,7 @@ const NavBar = () => {
               <NavLink route={router.pathname} to="/drafts" colorScheme="gray">
                 Drafts
               </NavLink>
-              <NavLink route={router.pathname} to="/create/posts" variant="solid" isLoading={loading}>
+              <NavLink route={router.pathname} to="/posts/new" variant="solid" isLoading={loading}>
                 Write a post
               </NavLink>
             </HStack>
@@ -153,7 +153,7 @@ const NavBar = () => {
                   <NavLink route={router.pathname} to="/drafts" colorScheme="gray">
                     Drafts
                   </NavLink>
-                  <NavLink route={router.pathname} to="/create/posts" variant="solid">
+                  <NavLink route={router.pathname} to="/posts/new" variant="solid">
                     Write a post
                   </NavLink>
                 </>
