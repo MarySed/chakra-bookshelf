@@ -34,7 +34,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, params 
     },
 
     include: {
-      books: true,
+      books: {
+        include: {
+          author: true,
+        },
+      },
     },
 
     orderBy: {
@@ -55,10 +59,7 @@ type Props = {
   session: Session;
 };
 
-const Bookshelves = ({ bookshelves, session }: Props) => {
-  console.log(bookshelves, 'bookshelves');
-  console.log(session, 'session...');
-
+const Bookshelves = ({ bookshelves }: Props) => {
   const router = useRouter();
 
   const { id } = router.query;
@@ -69,12 +70,7 @@ const Bookshelves = ({ bookshelves, session }: Props) => {
     <Layout>
       <Heading size="lg" as="h1" mb={3}>
         Your Bookshelves {'  '}
-        <Button
-          bg={'main'}
-          color={'base.inverted'}
-          _hover={{ bg: 'main.dark' }}
-          onClick={() => Router.push('/create/bookshelf')}
-        >
+        <Button variant="ghost" onClick={() => Router.push('/create/bookshelf')}>
           Create bookshelf
         </Button>
       </Heading>

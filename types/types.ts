@@ -18,3 +18,11 @@ const bookshelfWithBooks = Prisma.validator<Prisma.BookshelfArgs>()({
 });
 
 export type BookshelfWithBooks = Prisma.BookshelfGetPayload<typeof bookshelfWithBooks>;
+
+const bookWithAuthor = Prisma.validator<Prisma.BookArgs>()({
+  include: {
+    author: true,
+  },
+});
+
+export type BookWithAuthor = Prisma.BookGetPayload<typeof bookWithAuthor>;

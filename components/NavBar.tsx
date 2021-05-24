@@ -14,15 +14,26 @@ import {
   Stack,
   useColorMode,
   Skeleton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  MenuGroup,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
 import NavLink from 'components/NavLink';
+import { isRouteActive } from 'utilities/utils';
 
 const NavBar = () => {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const router = useRouter();
+
+  const userName = session?.user?.name ?? 'Guest';
+
+  //@ts-expect-error will fix these errors later
+  const userId = session?.user?.id ?? undefined;
 
   return (
     <>
@@ -89,12 +100,39 @@ const NavBar = () => {
 
             <Menu>
               <MenuButton as="button" rounded="full" cursor="pointer">
-                <Avatar name={session?.user?.name ?? ''} src={session?.user?.image ?? ''} size="sm" />
+                <Avatar name={userName} src={session?.user?.image ?? ''} size="sm" />
               </MenuButton>
+              <MenuList>
+                <MenuGroup title="Profile">
+                  <MenuItem
+                    // Disable profile button if user is not signed in.
+                    isDisabled={!userId || isRouteActive(`/users/${userId}`, router.asPath)}
+                    onClick={() => (userId ? router.push(`/users/${userId}`) : undefined)}
+                  >
+                    {userName}
+                  </MenuItem>
+                </MenuGroup>
+                <MenuDivider />
+
+                {/* Display links to bookshelves and reviews if user is logged in */}
+                {userId && (
+                  <>
+                    <MenuItem
+                      isDisabled={isRouteActive(`/users/${userId}/bookshelves/list`, router.asPath)}
+                      onClick={() => router.push(`/users/${userId}/bookshelves/list`)}
+                    >
+                      Bookshelves
+                    </MenuItem>
+                    {/* TODO: Add reviews  link */}
+                    <MenuItem>Reviews</MenuItem>{' '}
+                  </>
+                )}
+              </MenuList>
             </Menu>
           </Flex>
         </Flex>
 
+        {/* Hamburger menu for mobile devices & small screens */}
         {isOpen && (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>

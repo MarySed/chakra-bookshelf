@@ -77,59 +77,48 @@ const Users = ({ user, session, userId }: Props) => {
     <Layout>
       <Flex
         direction="column"
-        w="100%"
-        p={12}
+        p={6}
         bg={useColorModeValue('base.inverted', 'gray.800')}
         width="100%"
         rounded={6}
         borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
         borderWidth={1}
-        height="100%"
-        minHeight="100vh"
+        mb={8}
       >
-        {user ? (
-          <>
-            <Flex
-              direction={{ base: 'column', md: 'row' }}
-              mb={{ base: 6 }}
-              width="100%"
-              alignSelf="flex-start"
-              alignItems="center"
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              <Avatar size="2xl" mb={6} rounded="full" src={user.image} mr={{ md: 6 }} />
-              <Flex direction="column">
-                <Heading mb={2}>
-                  Profile{' '}
-                  {userCanEdit && (
-                    <Button variant="ghost" onClick={() => Router.push(`/bio/${user.id}`)}>
-                      Edit Profile
-                    </Button>
-                  )}
-                </Heading>
-                <Text>{user.bio?.content ?? ''}</Text>
-              </Flex>
-            </Flex>
-            <Flex direction="column" width="100%">
-              <Heading mb={2}>
-                Bookshelves{' '}
-                {userCanEdit && (
-                  <Button variant="ghost" onClick={() => Router.push(`/users/${user.id}/bookshelves/list`)}>
-                    Edit Bookshelves
-                  </Button>
-                )}
-              </Heading>
-              {user.bookshelf &&
-                user.bookshelf.map((shelf) => {
-                  console.log(shelf);
-                  return <BookList key={shelf.id} shelf={shelf} />;
-                })}
-            </Flex>
-          </>
+        <Flex direction="column" alignItems="center" w="100%" mb={6} textAlign="center">
+          {userCanEdit && (
+            <Button alignSelf="flex-end" variant="ghost" onClick={() => Router.push(`/bio/${user.id}`)}>
+              Edit Profile
+            </Button>
+          )}
+
+          <Avatar size="2xl" mb={6} rounded="full" src={user.image} />
+
+          <Heading mb={6} as="h1">
+            {user.name ?? 'Nameless user'}
+          </Heading>
+          <Text maxWidth="70%">{user.bio?.content ?? "This user doesn't have a bio yet"}</Text>
+        </Flex>
+      </Flex>
+
+      {/* Bookshelves */}
+      <Flex direction="column" width="100%" mb={8}>
+        {userCanEdit && (
+          <Button
+            variant="ghost"
+            alignSelf="flex-end"
+            onClick={() => Router.push(`/users/${user.id}/bookshelves/list`)}
+          >
+            Edit Bookshelves
+          </Button>
+        )}
+
+        {user.bookshelf ? (
+          user.bookshelf.map((shelf) => {
+            return <BookList key={shelf.id} shelf={shelf} />;
+          })
         ) : (
-          <>
-            <Text>User not found</Text>
-          </>
+          <Text>User has no bookshelves</Text>
         )}
       </Flex>
     </Layout>
