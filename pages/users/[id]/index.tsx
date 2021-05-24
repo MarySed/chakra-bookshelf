@@ -63,9 +63,16 @@ type Props = {
   userId: number;
 };
 
-const Users = ({ user }: Props) => {
+const Users = ({ user, session, userId }: Props) => {
   // TODO: Add check if current user is logged in user
-  //   console.log(user, 'user');
+
+  console.log(user, 'user');
+  console.log(session, 'session');
+  console.log(userId, 'userId');
+
+  //@ts-expect-error Types are incorrect for session
+  const userCanEdit = user?.id === session?.user?.id;
+
   return (
     <Layout>
       <Flex
@@ -80,52 +87,50 @@ const Users = ({ user }: Props) => {
         height="100%"
         minHeight="100vh"
       >
-        {/* Avatar and profile */}
-        <Flex
-          direction={{ base: 'column', md: 'row' }}
-          mb={{ base: 6 }}
-          width="100%"
-          alignSelf="flex-start"
-          alignItems="center"
-          textAlign={{ base: 'center', md: 'left' }}
-        >
-          <Avatar size="2xl" mb={6} rounded="full" src={user.image} mr={{ md: 6 }} />
-          <Flex direction="column">
-            <Heading mb={2}>
-              Profile{' '}
-              <Button
-                bg={'main'}
-                color={'base.inverted'}
-                _hover={{ bg: 'main.dark' }}
-                type="submit"
-                onClick={() => Router.push(`/bio/${user.id}`)}
-              >
-                Edit Profile
-              </Button>
-            </Heading>
-            <Text>{user.bio?.content ?? ''}</Text>
-          </Flex>
-        </Flex>
-
-        {/* Bookshelves */}
-        <Flex direction="column" width="100%">
-          <Heading mb={2}>
-            Bookshelves{' '}
-            <Button
-              bg={'main'}
-              color={'base.inverted'}
-              _hover={{ bg: 'main.dark' }}
-              onClick={() => Router.push(`/users/${user.id}/bookshelves/list`)}
+        {user ? (
+          <>
+            <Flex
+              direction={{ base: 'column', md: 'row' }}
+              mb={{ base: 6 }}
+              width="100%"
+              alignSelf="flex-start"
+              alignItems="center"
+              textAlign={{ base: 'center', md: 'left' }}
             >
-              Edit Bookshelves
-            </Button>
-          </Heading>
-          {user.bookshelf &&
-            user.bookshelf.map((shelf) => {
-              console.log(shelf);
-              return <BookList key={shelf.id} shelf={shelf} />;
-            })}
-        </Flex>
+              <Avatar size="2xl" mb={6} rounded="full" src={user.image} mr={{ md: 6 }} />
+              <Flex direction="column">
+                <Heading mb={2}>
+                  Profile{' '}
+                  {userCanEdit && (
+                    <Button variant="ghost" onClick={() => Router.push(`/bio/${user.id}`)}>
+                      Edit Profile
+                    </Button>
+                  )}
+                </Heading>
+                <Text>{user.bio?.content ?? ''}</Text>
+              </Flex>
+            </Flex>
+            <Flex direction="column" width="100%">
+              <Heading mb={2}>
+                Bookshelves{' '}
+                {userCanEdit && (
+                  <Button variant="ghost" onClick={() => Router.push(`/users/${user.id}/bookshelves/list`)}>
+                    Edit Bookshelves
+                  </Button>
+                )}
+              </Heading>
+              {user.bookshelf &&
+                user.bookshelf.map((shelf) => {
+                  console.log(shelf);
+                  return <BookList key={shelf.id} shelf={shelf} />;
+                })}
+            </Flex>
+          </>
+        ) : (
+          <>
+            <Text>User not found</Text>
+          </>
+        )}
       </Flex>
     </Layout>
   );

@@ -1,5 +1,5 @@
 import { Flex, Heading, Box, Link, Text, useColorModeValue } from '@chakra-ui/react';
-import { PostProps } from 'pages/p/[id]';
+import { PostProps } from 'pages/posts/[id]';
 
 const Post = ({ post }: { post: PostProps }) => {
   return (

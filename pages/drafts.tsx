@@ -2,7 +2,7 @@ import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
-import { PostProps } from './p/[id]';
+import { PostProps } from './posts/[id]';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import Post from 'components/Post';
 

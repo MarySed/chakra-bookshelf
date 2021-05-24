@@ -2,18 +2,17 @@ import Layout from 'components/Layout';
 import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex, useColorModeValue } from '@chakra-ui/react';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/client';
 
-const Create = () => {
+const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-
-  const [, loading] = useSession();
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const body = { title, content };
 
@@ -87,7 +86,7 @@ const Create = () => {
           type="submit"
           maxW="lg"
           onClick={handleSubmit}
-          isLoading={loading}
+          isLoading={isLoading}
         >
           Create Draft
         </Button>
@@ -96,4 +95,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreatePost;

@@ -1,10 +1,10 @@
-import { Avatar, Button, Flex, Heading, Skeleton, SkeletonText, Text, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Button, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { Session } from 'next-auth';
 import { signIn } from 'next-auth/client';
 import Router from 'next/router';
 
 // TODO: Update design and data available. Change button when logged in to go to user profile not bio
-const UserCard = ({ session, isLoading }: { session: Session | null; isLoading: boolean }) => {
+const UserCard = ({ session }: { session: Session | null }) => {
   const avatarSrc = session?.user?.image ?? '';
 
   return (
@@ -39,14 +39,11 @@ const UserCard = ({ session, isLoading }: { session: Session | null; isLoading: 
         </>
       ) : (
         <>
-          <SkeletonText isLoaded={!isLoading} mb={6}>
-            <Heading mb={6}>Welcome to Bookshelf</Heading>
-          </SkeletonText>
-          <Skeleton isLoaded={!isLoading}>
-            <Button bg="base.900" color="base.inverted" _hover={{ bg: 'base.800' }} onClick={() => signIn()}>
-              Log in
-            </Button>
-          </Skeleton>
+          <Heading mb={6}>Welcome to Bookshelf</Heading>
+
+          <Button bg="base.900" color="base.inverted" _hover={{ bg: 'base.800' }} onClick={() => signIn()}>
+            Log in
+          </Button>
         </>
       )}
     </Flex>
