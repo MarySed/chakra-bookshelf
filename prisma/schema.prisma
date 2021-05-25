@@ -85,6 +85,7 @@ model Book {
   country     String?
   pages       Int?
   bookshelfId Int?
+  description String?
   bookshelf   Bookshelf[] @relation(fields: [bookshelfId], references: [id])
   review      Review[]
 }

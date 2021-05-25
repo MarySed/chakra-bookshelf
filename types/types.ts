@@ -26,3 +26,11 @@ const bookWithAuthor = Prisma.validator<Prisma.BookArgs>()({
 });
 
 export type BookWithAuthor = Prisma.BookGetPayload<typeof bookWithAuthor>;
+
+const postWithAuthor = Prisma.validator<Prisma.PostArgs>()({
+  include: {
+    author: true,
+  },
+});
+
+export type PostWithAuthor = Prisma.PostGetPayload<typeof postWithAuthor>;

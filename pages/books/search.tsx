@@ -4,6 +4,7 @@ import Layout from 'components/Layout';
 import { useState } from 'react';
 import { constructCoverString } from 'utilities/utils';
 
+// Page for users to search books using openLibrary API and add results to their personal dbs. WIP
 const Books = () => {
   const [books, setBooks] = useState([]);
 

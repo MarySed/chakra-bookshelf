@@ -4,7 +4,7 @@ import { getSession } from 'next-auth/client';
 
 // POST request to create user bio
 const handle: NextApiHandler = async (req, res) => {
-  const { title, author, year, pages, language, imageLink, link, country } = req.body;
+  const { title, author, year, pages, language, imageLink, link, country, firstName, lastName, description } = req.body;
 
   const session = await getSession({ req });
 
@@ -21,9 +21,17 @@ const handle: NextApiHandler = async (req, res) => {
       image: imageLink,
       link: link,
       country: country,
+      description: description,
       author: {
-        connect: {
-          fullName: author,
+        connectOrCreate: {
+          where: {
+            fullName: author,
+          },
+          create: {
+            fullName: author,
+            firstName: firstName ?? '',
+            lastName: lastName ?? '',
+          },
         },
       },
     },

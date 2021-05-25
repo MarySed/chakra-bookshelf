@@ -9,7 +9,7 @@ import { Session } from 'next-auth';
 import Router from 'next/router';
 import UserProfile from 'components/UserProfile';
 
-// TODO: This was a test of functionality. Move into new directory and update behavior
+// Note: This was an experiment page based off of user id rather than bio id. Not sure I'm a fan of this, and I may move this file and update its behavior.
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   const userId = Number(params?.id);
   const session = await getSession({ req });

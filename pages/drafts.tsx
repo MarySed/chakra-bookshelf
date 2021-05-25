@@ -2,9 +2,9 @@ import Layout from 'components/Layout';
 import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
-import { PostProps } from './posts/[id]';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import Post from 'components/Post';
+import { PostWithAuthor } from 'types/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 
 type Props = {
-  drafts: PostProps[];
+  drafts: PostWithAuthor[];
   session: any;
 };
 

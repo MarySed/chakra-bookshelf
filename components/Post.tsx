@@ -1,7 +1,7 @@
 import { Flex, Heading, Box, Link, Text, useColorModeValue } from '@chakra-ui/react';
-import { PostProps } from 'pages/posts/[id]';
+import { PostWithAuthor } from 'types/types';
 
-const Post = ({ post }: { post: PostProps }) => {
+const Post = ({ post }: { post: PostWithAuthor }) => {
   return (
     <Flex
       bg={useColorModeValue('white', 'gray.800')}

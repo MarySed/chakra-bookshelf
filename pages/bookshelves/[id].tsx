@@ -4,7 +4,9 @@ import prisma from 'lib/prisma';
 import { GetServerSideProps } from 'next';
 import Router from 'next/router';
 import { useSession } from 'next-auth/client';
+import { PostWithAuthor } from 'types/types';
 
+// TODO: Add
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
     where: {
@@ -22,17 +24,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-export type PostProps = {
-  id: number;
-  author?: { name: string; email?: string };
-  content?: string;
-  title: string;
-  published: boolean;
-  authorId: number;
-};
-
 // Full page view of specific bookshelf
-const Bookshelf = ({ post }: { post: PostProps }) => {
+const Bookshelf = ({ post }: { post: PostWithAuthor }) => {
   const [session, loading] = useSession();
 
   const userCanEdit = post.author?.email === session?.user?.email;

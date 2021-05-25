@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/client';
 // Page for creating bookshelf
 const CreateBookshelf = () => {
   const [name, setName] = useState('');
-  //   const [content, setContent] = useState('');
 
   const [, loading] = useSession();
 
