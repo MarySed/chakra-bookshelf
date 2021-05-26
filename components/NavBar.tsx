@@ -30,7 +30,7 @@ const NavBar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={2} alignItems="center">
-            <HStack as="nav" spacing={2} display={{ base: 'none', md: 'flex' }}>
+            <HStack as="nav" spacing={2} display={{ base: 'none', md: 'flex' }} gridGap={4}>
               <NavLink to="/">Timeline</NavLink>
               <NavLink to="/drafts" hoverColor="rainbow.pink">
                 Drafts

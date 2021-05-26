@@ -1,4 +1,4 @@
-import { Avatar, Menu, MenuButton, MenuList, MenuItem, MenuDivider, MenuGroup } from '@chakra-ui/react';
+import { Avatar, Menu, MenuButton, MenuList, MenuItem, MenuDivider, MenuGroup, Flex } from '@chakra-ui/react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { isRouteActive } from 'utilities/utils';
@@ -40,9 +40,9 @@ const UserMenuDropdown = () => {
             </MenuItem>
             {/* TODO: Add reviews  link */}
             <MenuItem>Reviews</MenuItem>
-            <MenuItem>
+            <Flex p={2}>
               <UserAuthButton />
-            </MenuItem>
+            </Flex>
           </>
         )}
       </MenuList>

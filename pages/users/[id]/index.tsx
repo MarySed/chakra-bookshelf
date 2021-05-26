@@ -1,14 +1,15 @@
 import Layout from 'components/Layout';
-import { Button, Flex, useColorModeValue, Avatar, Heading, Text } from '@chakra-ui/react';
+import { Flex, useColorModeValue, Avatar, Heading, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 import prisma from 'lib/prisma';
 import { Session } from 'next-auth';
-// import Router from 'next/router'; will add in later...
 import { Bio } from '.prisma/client';
-import Router from 'next/router';
 import { BookshelfWithBooks } from 'types/types';
 import BookList from 'components/BookList';
+import NavLink from 'components/NavLink';
+
+const MAX_BOOKSHELVES_DISPLAY = 3;
 
 // TODO: This was a test of functionality. Move into new directory and update behavior
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
@@ -27,6 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       bio: true,
       image: true,
       bookshelf: {
+        take: MAX_BOOKSHELVES_DISPLAY,
         select: {
           id: true,
           books: {
@@ -54,7 +56,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   };
 };
 
-// TODO: Finish this page. Ugh I am so bored I'm being lazy with code choices >_<
 type Props = {
   user: { id: number; name?: string; email?: string; bio?: Bio; image?: string; bookshelf?: BookshelfWithBooks[] };
   session: Session | null;
@@ -81,9 +82,9 @@ const Users = ({ user, session, userId }: Props) => {
       >
         <Flex direction="column" alignItems="center" w="100%" mb={6} textAlign="center">
           {userCanEdit && (
-            <Button alignSelf="flex-end" variant="ghost" onClick={() => Router.push(`/bio/${user.id}`)}>
-              Edit Profile
-            </Button>
+            <Flex mb={{ base: 8, md: 0 }} alignSelf={{ base: 'center', md: 'flex-end' }}>
+              <NavLink to={`/bio/${user.id}`}>Edit Profile</NavLink>
+            </Flex>
           )}
 
           <Avatar size="2xl" mb={6} rounded="full" src={user.image} />
@@ -96,15 +97,11 @@ const Users = ({ user, session, userId }: Props) => {
       </Flex>
 
       {/* Bookshelves */}
-      <Flex direction="column" width="100%" mb={8}>
+      <Flex direction="column" width="100%" mb={8} px={4}>
         {userCanEdit && (
-          <Button
-            variant="ghost"
-            alignSelf="flex-end"
-            onClick={() => Router.push(`/users/${user.id}/bookshelves/list`)}
-          >
-            Edit Bookshelves
-          </Button>
+          <Flex alignSelf={{ base: 'center', md: 'flex-end' }} mb={{ base: 8, md: 0 }}>
+            <NavLink to={`/users/${user.id}/bookshelves/list`}>Edit Bookshelves</NavLink>
+          </Flex>
         )}
 
         {user.bookshelf ? (
