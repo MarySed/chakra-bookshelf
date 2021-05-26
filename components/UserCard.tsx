@@ -1,7 +1,7 @@
 import { Avatar, Button, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { Session } from 'next-auth';
-import { signIn } from 'next-auth/client';
 import Router from 'next/router';
+import UserAuthButton from './UserAuthButton';
 
 // TODO: Update design and data available. Change button when logged in to go to user profile not bio
 const UserCard = ({ session }: { session: Session | null }) => {
@@ -31,6 +31,7 @@ const UserCard = ({ session }: { session: Session | null }) => {
             bg="base.900"
             color="base.inverted"
             _hover={{ bg: 'base.800' }}
+            width="100%"
             // @ts-expect-error Sigh.
             onClick={() => Router.push(`/users/${session?.user?.id}`)}
           >
@@ -41,9 +42,7 @@ const UserCard = ({ session }: { session: Session | null }) => {
         <>
           <Heading mb={6}>Welcome to Bookshelf</Heading>
 
-          <Button bg="base.900" color="base.inverted" _hover={{ bg: 'base.800' }} onClick={() => signIn()}>
-            Log in
-          </Button>
+          <UserAuthButton />
         </>
       )}
     </Flex>

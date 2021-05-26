@@ -44,6 +44,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
 };
 
 // TODO: Update page layout once connected with OpenLibrary API & books have details
+// TODO: Add book not found component to page
 const BookPage = ({ book, bookshelves }: { book: BookWithAuthor; bookshelves: Bookshelf[] }) => {
   console.log(book, 'book');
 
@@ -64,14 +65,14 @@ const BookPage = ({ book, bookshelves }: { book: BookWithAuthor; bookshelves: Bo
             justifyContent={{ base: 'center', md: 'unset' }}
           >
             <Box>
-              <Image width={250} height={350} src={book.image} fallback={<Skeleton height="350px" width="250px" />} />
+              <Image width={250} height={350} src={book?.image} fallback={<Skeleton height="350px" width="250px" />} />
             </Box>
             <Flex direction="column" ml={{ base: 0, md: 6 }}>
               <Heading as="h1" fontSize="2xl">
-                {book.title}
+                {book?.title}
               </Heading>
               <Heading as="h2" fontSize="2xl" fontWeight="thin">
-                By {book.author?.fullName ?? 'Unknown author'}
+                By {book?.author?.fullName ?? 'Unknown author'}
               </Heading>
               <Button variant="ghost" onClick={onOpen} mt="auto">
                 Add to bookshelf

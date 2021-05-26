@@ -6,9 +6,29 @@ import '../styles/globals.css';
 const customTheme = extendTheme({
   // Shamelessly taken from dev.to. Thanks dev.to!
   colors: {
-    // main: '#3b49df',
+    // Rainbow color palette:
+    'rainbow.pink': '#e71575',
+    'rainbow.red': '#f44336',
+    'rainbow.purple': '#673ab7',
+    'rainbow.lightblue': '#03a9f4',
+    'rainbow.indigo': '#3f51b5',
+    'rainbow.yellow': '#ffab00',
+    'rainbow.green': '#40c057',
+    'rainbow.blue': '#4c6ef5',
+
+    // Goodreads color palette. Use with black text.
+    'goodreads.300': '#f9f8f4',
+    'goodreads.100': '#fdfcfa',
+    'goodreads.main': '#f6f1e8',
+    'goodreads.main.dark': '#927f64',
+    'goodreads.main.verydark': '#382110',
+    'goodreads.main.medium': '#f5f1e9',
+
+    // Ugly pink color palette lol
     main: '#ff378a',
     'main.dark': '#d22a70',
+
+    // Dev.to inspired color palette. Use with white text.
     'base.900': '#202428',
     'base.800': '#363d44',
     'base.700': '#4d5760',
