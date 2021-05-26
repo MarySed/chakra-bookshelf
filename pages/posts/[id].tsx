@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next';
 import Router from 'next/router';
 import { useSession } from 'next-auth/client';
 import { PostWithAuthor } from 'types/types';
+import { useState } from 'react';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -25,12 +26,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 // Full page view of a user's social post. Note: different than reviews.
 const Post = ({ post }: { post: PostWithAuthor }) => {
-  const [session, loading] = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+  const [session] = useSession();
 
   const userCanEdit = post.author?.email === session?.user?.email;
 
   const handlePublish = async () => {
-    // setLoading(true);
+    setIsLoading(true);
 
     try {
       await fetch(`/api/publish/${post.id}`, {
@@ -60,41 +62,47 @@ const Post = ({ post }: { post: PostWithAuthor }) => {
       <Flex
         direction="column"
         w="100%"
-        p={12}
+        h="100%"
+        py={12}
+        px={{ base: 6, md: 12 }}
         bg={useColorModeValue('base.inverted', 'gray.800')}
-        width="100%"
-        rounded={6}
         borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}
+        borderTopWidth={0}
+        rounded={6}
         borderWidth={1}
       >
-        <Heading size="2xl" as="h1" mb={2}>
-          {post.title}
-        </Heading>
-        <Heading size="lg" as="sub" mb={12} fontWeight="thin">
+        <Flex gridGap={4} wrap="wrap" justifyContent="space-between" w="100%" mb={12}>
+          <Heading size="2xl" as="h1">
+            {post.title}
+          </Heading>
+
+          <Flex gridGap={2}>
+            {userCanEdit && !post.published && (
+              <Button
+                bg={'rainbow.blue'}
+                color={'base.inverted'}
+                _hover={{ bg: 'rainbow.indigo' }}
+                maxW="md"
+                onClick={handlePublish}
+                isLoading={isLoading}
+              >
+                Publish Story
+              </Button>
+            )}
+            {userCanEdit && (
+              <Button colorScheme="red" maxW="md" variant="solid" onClick={handleDelete} isLoading={isLoading}>
+                Delete Story
+              </Button>
+            )}
+          </Flex>
+        </Flex>
+        <Heading size="lg" as="sub" fontWeight="thin" mb={12}>
           By {post.author?.name}
         </Heading>
-        <Text fontSize="lg" mb={12}>
+
+        <Text fontSize="lg" mb={12} whiteSpace="pre-line">
           {post?.content}
         </Text>
-        <Flex gridGap={6} wrap="wrap">
-          {userCanEdit && !post.published && (
-            <Button
-              bg={'main'}
-              color={'base.inverted'}
-              _hover={{ bg: 'main.dark' }}
-              maxW="md"
-              onClick={handlePublish}
-              isLoading={loading}
-            >
-              Publish Story
-            </Button>
-          )}
-          {userCanEdit && (
-            <Button colorScheme="gray" maxW="md" variant="outline" onClick={handleDelete} isLoading={loading}>
-              Delete Story
-            </Button>
-          )}
-        </Flex>
       </Flex>
     </Layout>
   );

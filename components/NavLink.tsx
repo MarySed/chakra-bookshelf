@@ -28,6 +28,7 @@ const NavLink = ({
           fontWeight="bold"
           color={useColorModeValue('base', 'base.inverted')}
           _hover={{ color: hoverColor }}
+          _active={{ color: hoverColor }}
           _focus={{ outline: 'none' }}
           isDisabled={isDisabled ? isDisabled : isRouteActive(to, currentRoute)}
           variant="link"

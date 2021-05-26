@@ -13,7 +13,13 @@ const NavBar = () => {
 
   return (
     <>
-      <Box bg={useColorModeValue('base.inverted', 'base')} mb={12} px={{ base: 6, lg: 12 }} boxShadow="md">
+      <Box
+        bg={useColorModeValue('base.inverted', 'base')}
+        mb={12}
+        px={{ base: 6, lg: 12 }}
+        boxShadow="md"
+        position="relative"
+      >
         <Flex height={16} alignItems="center" justifyContent="space-between">
           {/* Hamburger dropdown for mobile display */}
           <IconButton

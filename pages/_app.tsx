@@ -15,14 +15,17 @@ const customTheme = extendTheme({
     'rainbow.yellow': '#ffab00',
     'rainbow.green': '#40c057',
     'rainbow.blue': '#4c6ef5',
+    // #416ffe96
+    'rainbow.lightpurple': '#be4bdb',
+    'rainbow.mediumpurple': '#9c53a6',
 
     // Goodreads color palette. Use with black text.
     'goodreads.300': '#f9f8f4',
     'goodreads.100': '#fdfcfa',
     'goodreads.main': '#f6f1e8',
-    'goodreads.main.dark': '#927f64',
-    'goodreads.main.verydark': '#382110',
-    'goodreads.main.medium': '#f5f1e9',
+    'goodreads.maindark': '#927f64',
+    'goodreads.mainverydark': '#382110',
+    'goodreads.mainmedium': '#f5f1e9',
 
     // Ugly pink color palette lol
     main: '#ff378a',

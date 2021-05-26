@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <Flex direction="column" bg={pageBg}>
       <NavBar />
-      <Flex direction="column" minHeight="100vh" px={{ base: 6, lg: 12 }} pb={20}>
+      <Flex direction="column" minHeight="100vh" px={{ base: 2, md: 6, lg: 12 }} pb={20}>
         {children}
       </Flex>
       <Footer />
