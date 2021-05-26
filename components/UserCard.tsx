@@ -1,10 +1,12 @@
 import { Avatar, Button, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { Session } from 'next-auth';
 import Router from 'next/router';
+import { useState } from 'react';
 import UserAuthButton from './UserAuthButton';
 
 // TODO: Update design and data available. Change button when logged in to go to user profile not bio
 const UserCard = ({ session }: { session: Session | null }) => {
+  const [loading, setLoading] = useState(false);
   const avatarSrc = session?.user?.image ?? '';
 
   return (
@@ -32,8 +34,12 @@ const UserCard = ({ session }: { session: Session | null }) => {
             color="base.inverted"
             _hover={{ bg: 'base.800' }}
             width="100%"
-            // @ts-expect-error Sigh.
-            onClick={() => Router.push(`/users/${session?.user?.id}`)}
+            isLoading={loading}
+            onClick={() => {
+              setLoading(true);
+              // @ts-expect-error Sigh.
+              return Router.push(`/users/${session?.user?.id}`);
+            }}
           >
             Visit Profile
           </Button>

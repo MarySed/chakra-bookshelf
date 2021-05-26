@@ -16,6 +16,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   const userId = Number(params?.id);
   const session = await getSession({ req });
 
+  const bookshelvesCount = await prisma.bookshelf.count({
+    where: {
+      userId: userId,
+    },
+  });
+
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -52,17 +58,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       user,
       session,
       userId,
+      bookshelvesCount,
     },
   };
 };
 
 type Props = {
-  user: { id: number; name?: string; email?: string; bio?: Bio; image?: string; bookshelf?: BookshelfWithBooks[] };
+  user: {
+    id: number;
+    name?: string;
+    email?: string;
+    bio?: Bio;
+    image?: string;
+    bookshelf?: BookshelfWithBooks[];
+  };
+  bookshelvesCount: number;
   session: Session | null;
   userId: number;
 };
 
-const Users = ({ user, session, userId }: Props) => {
+const Users = ({ user, session, userId, bookshelvesCount }: Props) => {
   // TODO: Add check if current user is logged in user
 
   //@ts-expect-error Types are incorrect for session
@@ -100,9 +115,14 @@ const Users = ({ user, session, userId }: Props) => {
       <Flex direction="column" width="100%" mb={8} px={4}>
         {userCanEdit && (
           <Flex alignSelf={{ base: 'center', md: 'flex-end' }} mb={{ base: 8, md: 0 }}>
-            <NavLink to={`/users/${user.id}/bookshelves/list`}>Edit Bookshelves</NavLink>
+            <NavLink to={`/users/${user.id}/bookshelves/list`} hoverColor="rainbow.yellow">
+              Edit Bookshelves
+            </NavLink>
           </Flex>
         )}
+
+        {/* TODO: Refactor */}
+        {bookshelvesCount && <Text>User has {bookshelvesCount} bookshelves</Text>}
 
         {user.bookshelf ? (
           user.bookshelf.map((shelf) => {

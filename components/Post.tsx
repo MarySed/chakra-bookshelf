@@ -6,8 +6,7 @@ const Post = ({ post }: { post: PostWithAuthor }) => {
     <Flex
       bg={useColorModeValue('white', 'gray.800')}
       width="100%"
-      height="100%"
-      maxH="40vh"
+      height="250px"
       rounded={6}
       overflow="hidden"
       borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}

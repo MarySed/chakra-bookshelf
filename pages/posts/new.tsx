@@ -3,6 +3,7 @@ import { FormControl, FormLabel, Heading, Input, Button, Textarea, Flex, useColo
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
+// TODO: Error handling & notifications for users. Create some toasts lol
 const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -12,6 +13,11 @@ const CreatePost = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+
+    if (!title) {
+      return;
+    }
+
     setIsLoading(true);
     try {
       const body = { title, content };
@@ -80,9 +86,9 @@ const CreatePost = () => {
         </FormControl>
 
         <Button
-          bg={'main'}
+          bg="rainbow.green"
           color={'base.inverted'}
-          _hover={{ bg: 'main.dark' }}
+          _hover={{ bg: 'rainbow.greendark' }}
           type="submit"
           maxW="lg"
           onClick={handleSubmit}

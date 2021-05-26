@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/layout';
 const Footer = () => {
   return (
     <Flex
-      bg={useColorModeValue('base.300', 'base')}
+      bg={useColorModeValue('base', 'base')}
       minH="30vh"
       alignItems="center"
       justifyContent="center"

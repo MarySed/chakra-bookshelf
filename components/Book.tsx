@@ -9,6 +9,7 @@ const Book = ({ book }: { book: BookWithAuthor }) => {
       width="200px"
       minW="200px"
       direction="column"
+      mb={4}
       mx={4}
       bg={useColorModeValue('white', 'gray.800')}
       borderColor={useColorModeValue('base.a100', 'blackAlpha.100')}

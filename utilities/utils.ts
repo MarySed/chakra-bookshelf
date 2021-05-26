@@ -1,3 +1,5 @@
+import { MAX_BOOK_FETCH } from 'constants/constants';
+
 export const isRouteActive = (targetPathname: string, currentRouteName: string) => {
   return targetPathname === currentRouteName;
 };
@@ -82,4 +84,35 @@ export const searchOpenLib = async ({
   }
 
   return;
+};
+
+// Maybe update this into a custom hook at some point
+// Make more flexible to support no cursor provided as well
+export const fetchCursoredBooks = async ({
+  cursorParams,
+  limit = MAX_BOOK_FETCH,
+}: {
+  cursorParams?: number;
+  limit?: number;
+}) => {
+  const results = await fetch(`/api/books?cursorParams=${cursorParams}&limit=${limit}`);
+
+  if (results.ok) {
+    const data = await results.json();
+
+    const finalResult = data[data.length - 1];
+    const newCursor = finalResult?.id;
+
+    return {
+      newCursor: newCursor,
+      books: data,
+      error: undefined,
+    };
+  }
+
+  return {
+    newCursor: cursorParams,
+    books: undefined,
+    error: true,
+  };
 };

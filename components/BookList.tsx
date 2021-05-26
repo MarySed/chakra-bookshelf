@@ -1,6 +1,7 @@
-import { Flex, Heading, Link } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import { BookshelfWithBooks } from 'types/types';
 import Book from './Book';
+import NavLink from './NavLink';
 
 type Props = {
   shelf: BookshelfWithBooks;
@@ -9,14 +10,10 @@ type Props = {
 const BookList = ({ shelf }: Props) => {
   return (
     <Flex direction="column" mb={12}>
-      <Heading as="h1" size="lg" mb={8} fontWeight="thin">
-        <Link
-          textDecoration="none"
-          _hover={{ textDecoration: 'none', textColor: 'main' }}
-          href={`/bookshelves/${shelf.id}`}
-        >
+      <Heading as="h1" size="lg" mb={4} fontWeight="thin">
+        <NavLink to={`/bookshelves/${shelf.id}`} hoverColor="rainbow.lightblue" fontSize="2rem">
           {shelf.name}
-        </Link>
+        </NavLink>
       </Heading>
 
       <Flex width="100%" overflowX="auto">

@@ -1,5 +1,5 @@
-import { useColorModeValue, Link } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { useColorModeValue, Link, Spinner } from '@chakra-ui/react';
+import { ReactNode, useState } from 'react';
 import { isRouteActive } from 'utilities/utils';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,16 +16,24 @@ const NavLink = ({
   fontSize?: string;
 }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const currentRoute = router.asPath;
   const isRouteMatch = isRouteActive(to, currentRoute);
 
+  const color = useColorModeValue(isRouteMatch ? 'gray.300' : 'base.700', isRouteMatch ? 'gray.100' : 'base.inverted');
+
+  // Crappy solution to making loading evident to users
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <NextLink href={to}>
       <Link
-        href={to}
+        onClick={() => setLoading(true)}
         fontWeight="bold"
-        color={useColorModeValue(isRouteMatch ? 'gray.300' : 'base', isRouteMatch ? 'gray.100' : 'base.inverted')}
+        color={color}
         _hover={{ color: isRouteMatch ? 'gray.100' : hoverColor }}
         _active={{ color: hoverColor }}
         _focus={{ outline: 'none' }}

@@ -35,6 +35,9 @@ const NavBar = () => {
               <NavLink to="/drafts" hoverColor="rainbow.pink">
                 Drafts
               </NavLink>
+              <NavLink to="/books/list" hoverColor="rainbow.yellow">
+                Books
+              </NavLink>
               <NavLink to="/posts/new" hoverColor="rainbow.green">
                 Write a post
               </NavLink>
@@ -61,6 +64,9 @@ const NavBar = () => {
                   <NavLink to="/">Timeline</NavLink>
                   <NavLink to="/drafts" hoverColor="rainbow.pink">
                     Drafts
+                  </NavLink>
+                  <NavLink to="/books/list" hoverColor="rainbow.yellow">
+                    Books
                   </NavLink>
                   <NavLink to="/posts/new" hoverColor="rainbow.green">
                     Write a post

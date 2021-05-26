@@ -14,6 +14,7 @@ const customTheme = extendTheme({
     'rainbow.indigo': '#3f51b5',
     'rainbow.yellow': '#ffab00',
     'rainbow.green': '#40c057',
+    'rainbow.greendark': '#3d915b',
     'rainbow.blue': '#4c6ef5',
     // #416ffe96
     'rainbow.lightpurple': '#be4bdb',

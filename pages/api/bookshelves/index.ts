@@ -3,6 +3,7 @@ import prisma from 'lib/prisma';
 import { NextApiHandler } from 'next';
 
 // POST request to create a new Bookshelf
+// TODO: Will add user ability to add books to shelf oncreation soon
 const handle: NextApiHandler = async (req, res) => {
   const { name, bookIds } = req.body;
 
