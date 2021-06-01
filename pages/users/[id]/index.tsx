@@ -6,10 +6,9 @@ import prisma from 'lib/prisma';
 import { Session } from 'next-auth';
 import { Bio } from '.prisma/client';
 import { BookshelfWithBooks } from 'types/types';
+import { MAX_BOOKSHELVES_DISPLAY } from 'constants/constants';
 import BookList from 'components/BookList';
 import NavLink from 'components/NavLink';
-
-const MAX_BOOKSHELVES_DISPLAY = 3;
 
 // TODO: This was a test of functionality. Move into new directory and update behavior
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
@@ -121,9 +120,6 @@ const Users = ({ user, session, userId, bookshelvesCount }: Props) => {
           </Flex>
         )}
 
-        {/* TODO: Refactor */}
-        {bookshelvesCount && <Text>User has {bookshelvesCount} bookshelves</Text>}
-
         {user.bookshelf ? (
           user.bookshelf.map((shelf) => {
             return <BookList key={shelf.id} shelf={shelf} />;
@@ -132,6 +128,12 @@ const Users = ({ user, session, userId, bookshelvesCount }: Props) => {
           <Text>User has no bookshelves</Text>
         )}
       </Flex>
+
+      {bookshelvesCount > MAX_BOOKSHELVES_DISPLAY && (
+        <NavLink to={`/users/${user.id}/bookshelves/list`} hoverColor="rainbow.yellow" fontSize="1.2rem">
+          <Text>See {bookshelvesCount - MAX_BOOKSHELVES_DISPLAY} more bookshelves...</Text>
+        </NavLink>
+      )}
     </Layout>
   );
 };
