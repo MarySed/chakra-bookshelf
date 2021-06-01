@@ -87,7 +87,6 @@ export const searchOpenLib = async ({
 };
 
 // Maybe update this into a custom hook at some point
-// Make more flexible to support no cursor provided as well
 export const fetchCursoredBooks = async ({
   cursorParams,
   limit = MAX_BOOK_FETCH,
@@ -95,7 +94,11 @@ export const fetchCursoredBooks = async ({
   cursorParams?: number;
   limit?: number;
 }) => {
-  const results = await fetch(`/api/books?cursorParams=${cursorParams}&limit=${limit}`);
+  const fetchUrl = cursorParams
+    ? `/api/books?cursorParams=${cursorParams}&limit=${limit}`
+    : `/api/books?limit=${limit}`;
+
+  const results = await fetch(fetchUrl);
 
   if (results.ok) {
     const data = await results.json();

@@ -31,7 +31,7 @@ const BooksListPage = ({ books, newCursor }: { books: BookWithAuthor[]; newCurso
       <Heading as="h1" size="2xl" mb={8}>
         All Books
       </Heading>
-      <BookGrid fetchedBooks={books} newCursor={newCursor} />
+      <BookGrid fetchedBooks={books} fetchedCursor={newCursor} />
     </Layout>
   );
 };

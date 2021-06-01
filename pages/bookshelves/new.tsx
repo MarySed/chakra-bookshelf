@@ -11,34 +11,11 @@ import {
 } from '@chakra-ui/react';
 import { SyntheticEvent, useState } from 'react';
 import Router from 'next/router';
-import { GetServerSideProps } from 'next';
-import prisma from 'lib/prisma';
-import { MAX_BOOK_FETCH } from 'constants/constants';
-import { BookWithAuthor } from 'types/types';
 import BookGrid from 'components/BookGrid';
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const results = await prisma.book.findMany({
-    take: MAX_BOOK_FETCH,
-    include: {
-      author: true,
-    },
-    orderBy: {
-      id: 'asc',
-    },
-  });
-
-  return {
-    props: {
-      books: results,
-      newCursor: results[results.length - 1]?.id,
-    },
-  };
-};
 
 // Page for creating bookshelf
 // TODO: create selectable book component, and allow users to add books as they make their bookshelves
-const CreateBookshelf = ({ books, newCursor }: { books: BookWithAuthor[]; newCursor: number }) => {
+const CreateBookshelf = () => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   // const [bookIds, setBookIds] = useState<number[]>([]);
@@ -120,7 +97,7 @@ const CreateBookshelf = ({ books, newCursor }: { books: BookWithAuthor[]; newCur
         <Heading as="h2" size="xl" mb={8}>
           Add Some Books
         </Heading>
-        <BookGrid newCursor={newCursor} fetchedBooks={books} />
+        <BookGrid />
       </Flex>
     </Layout>
   );
