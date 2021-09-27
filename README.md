@@ -1,3 +1,5 @@
+Note from the future: This has been abandoned but it was fun to learn about Prisma.
+
 # BOOKSHELF: Next.js, Prisma, and Chakra-UI
 
 Ideally this is going to be a small Goodreads-like personal bookshelf/social media app.
